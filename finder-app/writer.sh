@@ -13,13 +13,13 @@ writestr="$2"
 if [ $(mkdir -p $writefile) -neq 0 ];
 	then
 		echo "Could not create file."
-		exit(1)
+		exit(1);
 fi
 
 # Try to create the file. If not successful, return with exit code 1.
 if [ $($writestr > $writefile) -neq 0 ];
 	then
 		echo "Could not write to file."
-		exit(1)
+		exit(1);
 fi
 
