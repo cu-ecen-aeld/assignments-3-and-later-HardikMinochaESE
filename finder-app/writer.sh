@@ -18,16 +18,14 @@ mkdir -p "$directory_extracted"
 if [ $? -ne 0 ];
 	then
 		echo "Could not create directory."
-		echo "Exit code 1"
 		exit 1;
 fi
 
 # Try writing the string to the file. If not successful, return with exit code 1.
-echo $writestr > $writefile
+echo "$writestr" > "$writefile"
 if [ $? -ne 0 ];
 	then
 		echo "Could not write to file."
-		echo "Exit code 1"
 		exit 1;
 fi
 

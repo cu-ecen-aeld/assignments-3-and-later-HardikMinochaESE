@@ -17,7 +17,7 @@ fi
 
 filecount=$(find "$filesdir" -type f | wc -l)
 
-string_found=$(grep -r "$searchstr" | wc -l)
+string_found=$(grep -r "$searchstr" "$filesdir" | wc -l)
 
 echo "The number of files are $filecount and the number of matching lines are $string_found"
 
