@@ -8,7 +8,6 @@ if [ $# -ne 2 ];
 		exit 1;
 fi
 
-s
 writefile="$1"
 writestr="$2"
 
