@@ -1,9 +1,9 @@
 ﻿{
-  "agentId": 22,
-  "agentName": "AESD_ASSGN1",
+  "agentId": 2,
+  "agentName": "ASSGN-2",
   "poolId": 1,
   "poolName": "Default",
-  "serverUrl": "https://pipelinesghubeus14.actions.githubusercontent.com/QukfSYf4rimFLk3yqvJ0DYGf705uEXp1R4WGVsQ6r4zRIFbOll/",
-  "gitHubUrl": "https://github.com/cu-ecen-aeld/assignment-1-HardikMinochaESE-1",
+  "serverUrl": "https://pipelinesghubeus8.actions.githubusercontent.com/QyXwiOx7q2C3fH3CxaU08CJIjVG2VNGTHv8km0DkztWUqmM88N/",
+  "gitHubUrl": "https://github.com/cu-ecen-aeld/assignment-2-HardikMinochaESE",
   "workFolder": "_work"
 }
