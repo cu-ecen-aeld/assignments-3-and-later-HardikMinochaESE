@@ -702,4 +702,68 @@
 2025-02-05T08:31:14.5832408Z   AS [M]  arch/arm64/crypto/aes-neon.o
 2025-02-05T08:31:14.7804217Z   LD [M]  arch/arm64/crypto/aes-neon-blk.o
 2025-02-05T08:31:14.8593122Z   CC [M]  arch/arm64/crypto/sha512-glue.o
-2025-02-05T08:31:16.4222054Z   PERLASM arch/arm64/crypto/sha512
+2025-02-05T08:31:16.4222054Z   PERLASM arch/arm64/crypto/sha512-core.S
+2025-02-05T08:31:16.4860473Z   AS [M]  arch/arm64/crypto/sha512-core.o
+2025-02-05T08:31:16.6757336Z   LD [M]  arch/arm64/crypto/sha512-arm64.o
+2025-02-05T08:31:16.6983804Z   AS [M]  arch/arm64/crypto/chacha-neon-core.o
+2025-02-05T08:31:16.9756946Z   CC [M]  arch/arm64/crypto/chacha-neon-glue.o
+2025-02-05T08:31:18.1698672Z   LD [M]  arch/arm64/crypto/chacha-neon.o
+2025-02-05T08:31:18.2117166Z   AS [M]  arch/arm64/crypto/aes-neonbs-core.o
+2025-02-05T08:31:18.3367975Z   CC [M]  arch/arm64/crypto/aes-neonbs-glue.o
+2025-02-05T08:31:20.5083917Z   LD [M]  arch/arm64/crypto/aes-neon-bs.o
+2025-02-05T08:31:20.5759194Z   AR      arch/arm64/built-in.a
+2025-02-05T08:31:20.8611870Z   CC      kernel/sched/core.o
+2025-02-05T08:31:29.2652364Z   CC      kernel/sched/loadavg.o
+2025-02-05T08:31:31.6792040Z   CC      kernel/sched/clock.o
+2025-02-05T08:31:33.6403591Z   CC      kernel/sched/cputime.o
+2025-02-05T08:31:35.3545310Z   CC      kernel/sched/idle.o
+2025-02-05T08:31:37.2724956Z   CC      kernel/sched/fair.o
+2025-02-05T08:31:47.5065909Z   CC      kernel/sched/rt.o
+2025-02-05T08:31:51.1799562Z   CC      kernel/sched/deadline.o
+2025-02-05T08:31:55.9102869Z   CC      kernel/sched/wait.o
+2025-02-05T08:31:58.3814564Z   CC      kernel/sched/wait_bit.o
+2025-02-05T08:32:00.9213931Z   CC      kernel/sched/swait.o
+2025-02-05T08:32:03.5036637Z   CC      kernel/sched/completion.o
+2025-02-05T08:32:05.9412788Z   CC      kernel/sched/cpupri.o
+2025-02-05T08:32:07.6639999Z   CC      kernel/sched/cpudeadline.o
+2025-02-05T08:32:09.7435696Z   CC      kernel/sched/topology.o
+2025-02-05T08:32:14.0131794Z   CC      kernel/sched/stop_task.o
+2025-02-05T08:32:15.7738925Z   CC      kernel/sched/pelt.o
+2025-02-05T08:32:18.3571946Z   CC      kernel/sched/autogroup.o
+2025-02-05T08:32:20.7634481Z   CC      kernel/sched/cpuacct.o
+2025-02-05T08:32:23.0783423Z   CC      kernel/sched/cpufreq.o
+2025-02-05T08:32:24.5955726Z   CC      kernel/sched/cpufreq_schedutil.o
+2025-02-05T08:32:27.2963982Z   CC      kernel/sched/membarrier.o
+2025-02-05T08:32:30.0834515Z   CC      kernel/sched/isolation.o
+2025-02-05T08:32:32.0925875Z   AR      kernel/sched/built-in.a
+2025-02-05T08:32:32.1537948Z   CC      kernel/locking/mutex.o
+2025-02-05T08:32:33.7695617Z   CC      kernel/locking/semaphore.o
+2025-02-05T08:32:34.8647456Z   CC      kernel/locking/rwsem.o
+2025-02-05T08:32:36.4707270Z   CC      kernel/locking/percpu-rwsem.o
+2025-02-05T08:32:37.4087932Z   CC      kernel/locking/spinlock.o
+2025-02-05T08:32:38.5652146Z   CC      kernel/locking/osq_lock.o
+2025-02-05T08:32:39.3710986Z   CC      kernel/locking/qspinlock.o
+2025-02-05T08:32:40.2492411Z   CC      kernel/locking/rtmutex_api.o
+2025-02-05T08:32:41.8375993Z   CC      kernel/locking/qrwlock.o
+2025-02-05T08:32:43.2566291Z   AR      kernel/locking/built-in.a
+2025-02-05T08:32:43.3317163Z   CC      kernel/power/qos.o
+2025-02-05T08:32:45.2297046Z   CC      kernel/power/main.o
+2025-02-05T08:32:47.7182573Z   CC      kernel/power/console.o
+2025-02-05T08:32:49.1866080Z   CC      kernel/power/process.o
+2025-02-05T08:32:50.7548472Z   CC      kernel/power/suspend.o
+2025-02-05T08:32:52.5631809Z   CC      kernel/power/hibernate.o
+2025-02-05T08:32:54.7691139Z   CC      kernel/power/snapshot.o
+2025-02-05T08:32:57.9601006Z   CC      kernel/power/swap.o
+2025-02-05T08:33:00.4165343Z   CC      kernel/power/user.o
+2025-02-05T08:33:02.6545950Z   CC      kernel/power/poweroff.o
+2025-02-05T08:33:03.2037372Z   CC      kernel/power/energy_model.o
+2025-02-05T08:33:04.2173623Z   AR      kernel/power/built-in.a
+2025-02-05T08:33:04.2758735Z   CC      kernel/printk/printk.o
+2025-02-05T08:33:07.8977176Z   CC      kernel/printk/printk_safe.o
+2025-02-05T08:33:09.6237736Z   CC      kernel/printk/printk_ringbuffer.o
+2025-02-05T08:33:11.3912500Z   AR      kernel/printk/built-in.a
+2025-02-05T08:33:11.4737943Z   CC      kernel/irq/irqdesc.o
+2025-02-05T08:33:12.9075157Z   CC      kernel/irq/handle.o
+2025-02-05T08:33:13.8947969Z   CC      kernel/irq/manage.o
+2025-02-05T08:33:16.1497366Z   CC      kernel/irq/spurious.o
+2025-02-05T08:33:17.9613651Z   CC      kernel/irq

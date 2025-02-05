@@ -87,7 +87,7 @@ bool do_exec(int count, ...)
     }
     if(child_pid == 0){
 	    // If fork() was successful, try execv() command.
-	    else if(execv(command[0], command)){
+	    if(execv(command[0], command)){
 		    syslog(LOG_ERR, "Failed to execute system process\n");
 		    exit(1); 
 	    }
