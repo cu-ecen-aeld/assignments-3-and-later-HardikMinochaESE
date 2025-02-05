@@ -1,6 +1,6 @@
 ﻿{
-  "agentId": 2,
-  "agentName": "AESD-3",
+  "agentId": 22,
+  "agentName": "Ubuntu",
   "poolId": 1,
   "poolName": "Default",
   "serverUrl": "https://pipelinesghubeus6.actions.githubusercontent.com/JxQeg6iB4GGvE3bMtDlNUb9oaNj8vtBGdA1j4tszZae3a17EQj/",
