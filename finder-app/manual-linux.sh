@@ -13,6 +13,7 @@ FINDER_APP_DIR=$(realpath $(dirname $0))
 ARCH=arm64
 CROSS_COMPILE=aarch64-none-linux-gnu-
 WRITER_APP=/home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/finder-app
+SYSROOT_DIR=$(${CROSS_COMPILE}-gcc -print-sysroot)
 
 if [ $# -lt 1 ]
 then
@@ -38,7 +39,8 @@ if [ ! -e ${OUTDIR}/linux-stable/arch/${ARCH}/boot/Image ]; then
     # TODO: Add your kernel build steps here
     make ARCH=${ARCH} CROSS_COMPILE=${CROSS_COMPILE} mrproper
     make ARCH=${ARCH} CROSS_COMPILE=${CROSS_COMPILE} defconfig
-    make ARCH=${ARCH} CROSS_COMPILE=${CROSS_COMPILE} -j$nproc 
+    make -j$nproc ARCH=${ARCH} CROSS_COMPILE=${CROSS_COMPILE} all
+    make ARCH=${ARCH} CROSS_COMPILE=${CROSS_COMPILE} dtbs
 fi
 
 echo "Adding the Image in outdir"
@@ -81,8 +83,8 @@ ${CROSS_COMPILE}readelf -a bin/busybox | grep "program interpreter"
 ${CROSS_COMPILE}readelf -a bin/busybox | grep "Shared library"
 
 # TODO: Add library dependencies to rootfs
-cp /lib/ld-linux-aarch64.so.1 ${OUTDIR}/rootfs
-cp /lib64/libm.so.6 /lib64/libresolv.so.2 /lib64/libc.so.6 ${OUTDIR}/rootfs 
+cp ${SYSROOT_DIR}/lib/ld-linux-aarch64.so.1 ${OUTDIR}/rootfs/lib
+cp ${SYSROOT_DIR}/lib64/libm.so.6 /lib64/libresolv.so.2 /lib64/libc.so.6 ${OUTDIR}/rootfs 
 
 # TODO: Make device nodes
 sudo mknod ${OUTDIR}/rootfs/dev/null c 1 3
