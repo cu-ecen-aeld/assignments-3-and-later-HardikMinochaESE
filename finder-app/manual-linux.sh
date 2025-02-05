@@ -12,7 +12,6 @@ BUSYBOX_VERSION=1_33_1
 FINDER_APP_DIR=$(realpath $(dirname $0))
 ARCH=arm64
 CROSS_COMPILE=aarch64-none-linux-gnu-
-WRITER_APP=/home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/finder-app
 SYSROOT_DIR=$(${CROSS_COMPILE}gcc -print-sysroot)
 
 if [ $# -lt 1 ]
@@ -37,15 +36,14 @@ if [ ! -e ${OUTDIR}/linux-stable/arch/${ARCH}/boot/Image ]; then
     git checkout ${KERNEL_VERSION}
 
     # TODO: Add your kernel build steps here
-    make -j6 ARCH=${ARCH} CROSS_COMPILE=${CROSS_COMPILE} mrproper
-    make -j6 ARCH=${ARCH} CROSS_COMPILE=${CROSS_COMPILE} defconfig
+    # make -j6 ARCH=${ARCH} CROSS_COMPILE=${CROSS_COMPILE} mrproper
+    # make -j6 ARCH=${ARCH} CROSS_COMPILE=${CROSS_COMPILE} defconfig
     make -j6 ARCH=${ARCH} CROSS_COMPILE=${CROSS_COMPILE} all
     make -j6 ARCH=${ARCH} CROSS_COMPILE=${CROSS_COMPILE} dtbs
 fi
 
 echo "Adding the Image in outdir"
-mkdir -p ${OUTDIR}/Image
-cp -r ${OUTDIR}/linux-stable/* ${OUTDIR}/Image
+cp -r ${OUTDIR}/linux-stable/arch/${ARCH}/boot/Image ${OUTDIR}
 
 echo "Creating the staging directory for the root filesystem"
 cd "$OUTDIR"
@@ -86,14 +84,14 @@ ${CROSS_COMPILE}readelf -a bin/busybox | grep "Shared library"
 
 # TODO: Add library dependencies to rootfs
 cp ${SYSROOT_DIR}/lib/ld-linux-aarch64.so.1 ${OUTDIR}/rootfs/lib
-cp ${SYSROOT_DIR}/lib64/libm.so.6 /lib64/libresolv.so.2 /lib64/libc.so.6 ${OUTDIR}/rootfs 
+cp ${SYSROOT_DIR}/lib64/libm.so.6 ${SYSROOT_DIR}/lib64/libm.so.6/lib64/libresolv.so.2 ${SYSROOT_DIR}/lib64/libm.so.6/lib64/libc.so.6 ${OUTDIR}/rootfs/lib64
 
 # TODO: Make device nodes
-sudo mknod ${OUTDIR}/rootfs/dev/null c 1 3
-sudo mknod ${OUTDIR}/rootfs/dev/console c 5 1
+sudo mknod -m 666 ${OUTDIR}/rootfs/dev/null c 1 3
+sudo mknod -m 600 ${OUTDIR}/rootfs/dev/console c 5 1
 
 # TODO: Clean and build the writer utility
-cd ${WRITER_APP}
+cd ${FINDER_APP_DIR}
 make clean
 make ARCH=${ARCH} CROSS_COMPILE=${CROSS_COMPILE}
 cp writer ${OUTDIR}/rootfs/home
