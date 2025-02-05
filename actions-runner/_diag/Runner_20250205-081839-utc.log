@@ -1,0 +1,412 @@
+[2025-02-05 08:18:39Z INFO HostContext] No proxy settings were found based on environmental variables (http_proxy/https_proxy/HTTP_PROXY/HTTPS_PROXY)
+[2025-02-05 08:18:39Z INFO HostContext] Well known directory 'Bin': '/home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner/bin'
+[2025-02-05 08:18:39Z INFO HostContext] Well known directory 'Root': '/home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner'
+[2025-02-05 08:18:39Z INFO HostContext] Well known config file 'Credentials': '/home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner/.credentials'
+[2025-02-05 08:18:39Z INFO HostContext] Well known directory 'Bin': '/home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner/bin'
+[2025-02-05 08:18:39Z INFO HostContext] Well known directory 'Root': '/home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner'
+[2025-02-05 08:18:39Z INFO HostContext] Well known config file 'Runner': '/home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner/.runner'
+[2025-02-05 08:18:39Z INFO Listener] Runner is built for Linux (X64) - linux-x64.
+[2025-02-05 08:18:39Z INFO Listener] RuntimeInformation: Ubuntu 22.04.5 LTS.
+[2025-02-05 08:18:39Z INFO Listener] Version: 2.322.0
+[2025-02-05 08:18:39Z INFO Listener] Commit: 0edc478ca75d0a753dcbcec7405f3f26db67b1ac
+[2025-02-05 08:18:39Z INFO Listener] Culture: en-IN
+[2025-02-05 08:18:39Z INFO Listener] UI Culture: en-IN
+[2025-02-05 08:18:39Z INFO HostContext] Well known directory 'Bin': '/home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner/bin'
+[2025-02-05 08:18:39Z INFO HostContext] Well known directory 'Root': '/home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner'
+[2025-02-05 08:18:39Z INFO Listener] Validating directory permissions for: '/home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner'
+[2025-02-05 08:18:39Z INFO CommandLineParser] Parse
+[2025-02-05 08:18:39Z INFO CommandLineParser] Parsing 1 args
+[2025-02-05 08:18:39Z INFO CommandLineParser] parsing argument
+[2025-02-05 08:18:39Z INFO CommandLineParser] HasArgs: False
+[2025-02-05 08:18:39Z INFO CommandLineParser] Adding Command: run
+[2025-02-05 08:18:39Z INFO Listener] Arguments parsed
+[2025-02-05 08:18:39Z INFO Runner] ExecuteCommand
+[2025-02-05 08:18:39Z INFO ConfigurationStore] currentAssemblyLocation: /home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner/bin/Runner.Listener.dll
+[2025-02-05 08:18:39Z INFO HostContext] Well known directory 'Bin': '/home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner/bin'
+[2025-02-05 08:18:39Z INFO ConfigurationStore] binPath: /home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner/bin
+[2025-02-05 08:18:39Z INFO HostContext] Well known directory 'Bin': '/home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner/bin'
+[2025-02-05 08:18:39Z INFO HostContext] Well known directory 'Root': '/home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner'
+[2025-02-05 08:18:39Z INFO ConfigurationStore] RootFolder: /home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner
+[2025-02-05 08:18:39Z INFO HostContext] Well known directory 'Bin': '/home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner/bin'
+[2025-02-05 08:18:39Z INFO HostContext] Well known directory 'Root': '/home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner'
+[2025-02-05 08:18:39Z INFO HostContext] Well known config file 'Runner': '/home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner/.runner'
+[2025-02-05 08:18:39Z INFO ConfigurationStore] ConfigFilePath: /home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner/.runner
+[2025-02-05 08:18:39Z INFO HostContext] Well known directory 'Bin': '/home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner/bin'
+[2025-02-05 08:18:39Z INFO HostContext] Well known directory 'Root': '/home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner'
+[2025-02-05 08:18:39Z INFO HostContext] Well known config file 'Credentials': '/home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner/.credentials'
+[2025-02-05 08:18:39Z INFO ConfigurationStore] CredFilePath: /home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner/.credentials
+[2025-02-05 08:18:39Z INFO HostContext] Well known directory 'Bin': '/home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner/bin'
+[2025-02-05 08:18:39Z INFO HostContext] Well known directory 'Root': '/home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner'
+[2025-02-05 08:18:39Z INFO HostContext] Well known config file 'MigratedCredentials': '/home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner/.credentials_migrated'
+[2025-02-05 08:18:39Z INFO ConfigurationStore] MigratedCredFilePath: /home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner/.credentials_migrated
+[2025-02-05 08:18:39Z INFO HostContext] Well known directory 'Bin': '/home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner/bin'
+[2025-02-05 08:18:39Z INFO HostContext] Well known directory 'Root': '/home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner'
+[2025-02-05 08:18:39Z INFO HostContext] Well known config file 'Service': '/home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner/.service'
+[2025-02-05 08:18:39Z INFO ConfigurationStore] ServiceConfigFilePath: /home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner/.service
+[2025-02-05 08:18:39Z INFO CommandSettings] Flag 'help': 'False'
+[2025-02-05 08:18:39Z INFO CommandSettings] Flag 'version': 'False'
+[2025-02-05 08:18:39Z INFO CommandSettings] Flag 'commit': 'False'
+[2025-02-05 08:18:39Z INFO CommandSettings] Flag 'check': 'False'
+[2025-02-05 08:18:39Z INFO CommandSettings] Command 'configure': 'False'
+[2025-02-05 08:18:39Z INFO CommandSettings] Command 'remove': 'False'
+[2025-02-05 08:18:39Z INFO CommandSettings] Command 'warmup': 'False'
+[2025-02-05 08:18:39Z INFO ConfigurationManager] LoadSettings
+[2025-02-05 08:18:39Z INFO ConfigurationStore] IsConfigured()
+[2025-02-05 08:18:39Z INFO ConfigurationStore] IsConfigured: True
+[2025-02-05 08:18:39Z INFO ConfigurationManager] Is configured: True
+[2025-02-05 08:18:39Z INFO ConfigurationStore] Read setting file: 325 chars
+[2025-02-05 08:18:39Z INFO ConfigurationManager] Settings Loaded
+[2025-02-05 08:18:39Z INFO ConfigurationStore] IsServiceConfigured()
+[2025-02-05 08:18:39Z INFO ConfigurationStore] IsServiceConfigured: False
+[2025-02-05 08:18:39Z INFO CommandSettings] Command 'run': 'True'
+[2025-02-05 08:18:39Z INFO ConfigurationStore] IsConfigured()
+[2025-02-05 08:18:39Z INFO ConfigurationStore] IsConfigured: True
+[2025-02-05 08:18:39Z INFO ConfigurationManager] Is configured: True
+[2025-02-05 08:18:39Z INFO Runner] Could not parse the argument value '' for StartupType. Defaulting to Manual
+[2025-02-05 08:18:39Z INFO Runner] Set runner startup type - Manual
+[2025-02-05 08:18:39Z INFO CommandSettings] Flag 'once': 'False'
+[2025-02-05 08:18:39Z INFO CommandSettings] Flag 'once': 'False'
+[2025-02-05 08:18:39Z INFO Runner] RunAsync
+[2025-02-05 08:18:39Z INFO ConfigurationManager] LoadSettings
+[2025-02-05 08:18:39Z INFO ConfigurationStore] IsConfigured()
+[2025-02-05 08:18:39Z INFO ConfigurationStore] IsConfigured: True
+[2025-02-05 08:18:39Z INFO ConfigurationManager] Is configured: True
+[2025-02-05 08:18:39Z INFO ConfigurationManager] Settings Loaded
+[2025-02-05 08:18:39Z INFO MessageListener] {
+  "AgentId": 2,
+  "AgentName": "AESD-3",
+  "PoolId": 1,
+  "PoolName": "Default",
+  "ServerUrl": "https://pipelinesghubeus6.actions.githubusercontent.com/JxQeg6iB4GGvE3bMtDlNUb9oaNj8vtBGdA1j4tszZae3a17EQj/",
+  "GitHubUrl": "https://github.com/cu-ecen-aeld/assignments-3-and-later-HardikMinochaESE",
+  "WorkFolder": "_work"
+}
+[2025-02-05 08:18:39Z INFO MessageListener] Loading Credentials
+[2025-02-05 08:18:39Z INFO ConfigurationStore] HasCredentials()
+[2025-02-05 08:18:39Z INFO ConfigurationStore] stored True
+[2025-02-05 08:18:39Z INFO CredentialManager] GetCredentialProvider
+[2025-02-05 08:18:39Z INFO CredentialManager] Creating type OAuth
+[2025-02-05 08:18:39Z INFO CredentialManager] Creating credential type: OAuth
+[2025-02-05 08:18:39Z INFO HostContext] Well known directory 'Bin': '/home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner/bin'
+[2025-02-05 08:18:39Z INFO HostContext] Well known directory 'Root': '/home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner'
+[2025-02-05 08:18:39Z INFO HostContext] Well known config file 'RSACredentials': '/home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner/.credentials_rsaparams'
+[2025-02-05 08:18:39Z INFO RSAFileKeyManager] Loading RSA key parameters from file /home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner/.credentials_rsaparams
+[2025-02-05 08:18:39Z INFO MessageListener] Attempt to create session.
+[2025-02-05 08:18:39Z INFO MessageListener] Connecting to the Runner Server...
+[2025-02-05 08:18:39Z INFO RunnerServer] EstablishVssConnection
+[2025-02-05 08:18:40Z INFO RunnerServer] Establish connection with 100 seconds timeout.
+[2025-02-05 08:18:40Z INFO GitHubActionsService] Starting operation Location.GetConnectionData
+[2025-02-05 08:18:40Z INFO RunnerServer] EstablishVssConnection
+[2025-02-05 08:18:40Z INFO RunnerServer] Establish connection with 60 seconds timeout.
+[2025-02-05 08:18:40Z INFO GitHubActionsService] Starting operation Location.GetConnectionData
+[2025-02-05 08:18:40Z INFO RunnerServer] EstablishVssConnection
+[2025-02-05 08:18:40Z INFO RunnerServer] Establish connection with 60 seconds timeout.
+[2025-02-05 08:18:40Z INFO GitHubActionsService] Starting operation Location.GetConnectionData
+[2025-02-05 08:18:41Z INFO GitHubActionsService] Finished operation Location.GetConnectionData
+[2025-02-05 08:18:42Z INFO GitHubActionsService] Finished operation Location.GetConnectionData
+[2025-02-05 08:18:43Z INFO GitHubActionsService] Finished operation Location.GetConnectionData
+[2025-02-05 08:18:43Z INFO MessageListener] VssConnection created
+[2025-02-05 08:18:43Z INFO Terminal] WRITE LINE: 
+[2025-02-05 08:18:43Z INFO Terminal] WRITE LINE: 
+[2025-02-05 08:18:44Z INFO RSAFileKeyManager] Loading RSA key parameters from file /home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner/.credentials_rsaparams
+[2025-02-05 08:18:44Z INFO RSAFileKeyManager] Loading RSA key parameters from file /home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner/.credentials_rsaparams
+[2025-02-05 08:18:44Z INFO GitHubActionsService] AAD Correlation ID for this token request: Unknown
+[2025-02-05 08:18:44Z INFO MessageListener] Session created.
+[2025-02-05 08:18:44Z INFO Terminal] WRITE LINE: Current runner version: '2.322.0'
+[2025-02-05 08:18:44Z INFO Terminal] WRITE LINE: 2025-02-05 08:18:44Z: Listening for Jobs
+[2025-02-05 08:18:44Z INFO JobDispatcher] Set runner/worker IPC timeout to 30 seconds.
+[2025-02-05 08:18:45Z INFO RSAFileKeyManager] Loading RSA key parameters from file /home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner/.credentials_rsaparams
+[2025-02-05 08:18:47Z INFO GitHubActionsService] AAD Correlation ID for this token request: Unknown
+[2025-02-05 08:18:47Z WARN GitHubActionsService] Retrieving an AAD auth token took a long time (2.0807262 seconds)
+[2025-02-05 08:18:49Z INFO MessageListener] Message '3831426717915302458' received from session '2baf31c0-4db7-46c1-97b2-a116f4c9c459'.
+[2025-02-05 08:18:49Z INFO ConfigurationStore] HasCredentials()
+[2025-02-05 08:18:49Z INFO ConfigurationStore] stored True
+[2025-02-05 08:18:49Z INFO CredentialManager] GetCredentialProvider
+[2025-02-05 08:18:49Z INFO CredentialManager] Creating type OAuth
+[2025-02-05 08:18:49Z INFO CredentialManager] Creating credential type: OAuth
+[2025-02-05 08:18:49Z INFO RSAFileKeyManager] Loading RSA key parameters from file /home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner/.credentials_rsaparams
+[2025-02-05 08:18:49Z INFO ActionsRunServer] EstablishVssConnection
+[2025-02-05 08:18:49Z INFO ActionsRunServer] Establish connection with 100 seconds timeout.
+[2025-02-05 08:18:49Z INFO GitHubActionsService] Starting operation Location.GetConnectionData
+[2025-02-05 08:18:49Z INFO GitHubActionsService] Finished operation Location.GetConnectionData
+[2025-02-05 08:18:49Z INFO RSAFileKeyManager] Loading RSA key parameters from file /home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner/.credentials_rsaparams
+[2025-02-05 08:18:49Z INFO RSAFileKeyManager] Loading RSA key parameters from file /home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner/.credentials_rsaparams
+[2025-02-05 08:18:49Z INFO GitHubActionsService] AAD Correlation ID for this token request: Unknown
+[2025-02-05 08:18:50Z INFO JobDispatcher] Job request 16 for plan 7edfa446-4e3f-464e-a075-60427a200303 job 0e10f8dd-85b5-5bee-19c6-47fc7db6f171 received.
+[2025-02-05 08:18:50Z INFO JobDispatcher] Pull OrchestrationId 7edfa446-4e3f-464e-a075-60427a200303.unit-test.__default from JWT claims
+[2025-02-05 08:18:50Z INFO MessageListener] Received job status event. JobState: Busy
+[2025-02-05 08:18:50Z INFO MessageListener] _getMessagesTokenSource is already disposed.
+[2025-02-05 08:18:50Z INFO Terminal] WRITE LINE: 2025-02-05 08:18:50Z: Running job: unit-test
+[2025-02-05 08:18:50Z INFO JobDispatcher] Start renew job request 16 for job 0e10f8dd-85b5-5bee-19c6-47fc7db6f171.
+[2025-02-05 08:18:50Z INFO JobDispatcher] Successfully renew job request 16, job is valid till 05/02/2025 8:28:50 am
+[2025-02-05 08:18:50Z INFO HostContext] Well known directory 'Bin': '/home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner/bin'
+[2025-02-05 08:18:50Z INFO ProcessInvokerWrapper] Starting process:
+[2025-02-05 08:18:50Z INFO ProcessInvokerWrapper]   File name: '/home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner/bin/Runner.Worker'
+[2025-02-05 08:18:50Z INFO ProcessInvokerWrapper]   Arguments: 'spawnclient 148 151'
+[2025-02-05 08:18:50Z INFO ProcessInvokerWrapper]   Working directory: '/home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner/bin'
+[2025-02-05 08:18:50Z INFO ProcessInvokerWrapper]   Require exit code zero: 'False'
+[2025-02-05 08:18:50Z INFO ProcessInvokerWrapper]   Encoding web name:  ; code page: ''
+[2025-02-05 08:18:50Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'True'
+[2025-02-05 08:18:50Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2025-02-05 08:18:50Z INFO ProcessInvokerWrapper]   Persist current code page: 'False'
+[2025-02-05 08:18:50Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2025-02-05 08:18:50Z INFO ProcessInvokerWrapper]   High priority process: 'True'
+[2025-02-05 08:18:50Z INFO ProcessInvokerWrapper] Process started with process id 134265, waiting for process exit.
+[2025-02-05 08:18:50Z INFO JobDispatcher] Send job request message to worker for job 0e10f8dd-85b5-5bee-19c6-47fc7db6f171.
+[2025-02-05 08:18:50Z INFO ProcessChannel] Sending message of length 27111, with hash '526a254ae2b70a1f114b8088c455eface6efcae7e9a535fa7b97b94bfe8c030d'
+[2025-02-05 08:18:50Z INFO JobNotification] Entering JobStarted Notification
+[2025-02-05 08:18:50Z INFO JobNotification] Entering StartMonitor
+[2025-02-05 08:19:17Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2025-02-05 08:19:17Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2025-02-05 08:19:17Z INFO ProcessInvokerWrapper] Finished process 134265 with exit code 102, and elapsed time 00:00:26.9024339.
+[2025-02-05 08:19:17Z INFO JobDispatcher] Worker finished for job 0e10f8dd-85b5-5bee-19c6-47fc7db6f171. Code: 102
+[2025-02-05 08:19:17Z INFO JobDispatcher] finish job request for job 0e10f8dd-85b5-5bee-19c6-47fc7db6f171 with result: Failed
+[2025-02-05 08:19:17Z INFO Terminal] WRITE LINE: 2025-02-05 08:19:17Z: Job unit-test completed with result: Failed
+[2025-02-05 08:19:17Z INFO JobDispatcher] Stop renew job request for job 0e10f8dd-85b5-5bee-19c6-47fc7db6f171.
+[2025-02-05 08:19:17Z INFO JobDispatcher] job renew has been cancelled, stop renew job request 16.
+[2025-02-05 08:19:17Z INFO JobNotification] Entering JobCompleted Notification
+[2025-02-05 08:19:17Z INFO JobNotification] Entering EndMonitor
+[2025-02-05 08:19:17Z INFO MessageListener] Received job status event. JobState: Online
+[2025-02-05 08:19:18Z INFO MessageListener] Message '8654044018775248485' received from session '2baf31c0-4db7-46c1-97b2-a116f4c9c459'.
+[2025-02-05 08:19:18Z INFO ConfigurationStore] HasCredentials()
+[2025-02-05 08:19:18Z INFO ConfigurationStore] stored True
+[2025-02-05 08:19:18Z INFO CredentialManager] GetCredentialProvider
+[2025-02-05 08:19:18Z INFO CredentialManager] Creating type OAuth
+[2025-02-05 08:19:18Z INFO CredentialManager] Creating credential type: OAuth
+[2025-02-05 08:19:18Z INFO RSAFileKeyManager] Loading RSA key parameters from file /home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner/.credentials_rsaparams
+[2025-02-05 08:19:18Z INFO ActionsRunServer] EstablishVssConnection
+[2025-02-05 08:19:18Z INFO ActionsRunServer] Establish connection with 100 seconds timeout.
+[2025-02-05 08:19:18Z INFO GitHubActionsService] Starting operation Location.GetConnectionData
+[2025-02-05 08:19:18Z INFO GitHubActionsService] Finished operation Location.GetConnectionData
+[2025-02-05 08:19:18Z INFO RSAFileKeyManager] Loading RSA key parameters from file /home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner/.credentials_rsaparams
+[2025-02-05 08:19:18Z INFO RSAFileKeyManager] Loading RSA key parameters from file /home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner/.credentials_rsaparams
+[2025-02-05 08:19:19Z INFO GitHubActionsService] AAD Correlation ID for this token request: Unknown
+[2025-02-05 08:19:19Z INFO JobDispatcher] Job request 17 for plan 7edfa446-4e3f-464e-a075-60427a200303 job a047640a-23da-5e9b-1ef8-917a09b3753a received.
+[2025-02-05 08:19:19Z INFO JobDispatcher] Pull OrchestrationId 7edfa446-4e3f-464e-a075-60427a200303.full-test.__default from JWT claims
+[2025-02-05 08:19:19Z INFO MessageListener] Received job status event. JobState: Busy
+[2025-02-05 08:19:19Z INFO MessageListener] _getMessagesTokenSource is already disposed.
+[2025-02-05 08:19:19Z INFO JobDispatcher] Job request 0e10f8dd-85b5-5bee-19c6-47fc7db6f171 processed succeed.
+[2025-02-05 08:19:19Z INFO Terminal] WRITE LINE: 2025-02-05 08:19:19Z: Running job: full-test
+[2025-02-05 08:19:19Z INFO JobDispatcher] Start renew job request 17 for job a047640a-23da-5e9b-1ef8-917a09b3753a.
+[2025-02-05 08:19:19Z INFO JobDispatcher] Successfully renew job request 17, job is valid till 05/02/2025 8:29:19 am
+[2025-02-05 08:19:19Z INFO HostContext] Well known directory 'Bin': '/home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner/bin'
+[2025-02-05 08:19:19Z INFO ProcessInvokerWrapper] Starting process:
+[2025-02-05 08:19:19Z INFO ProcessInvokerWrapper]   File name: '/home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner/bin/Runner.Worker'
+[2025-02-05 08:19:19Z INFO ProcessInvokerWrapper]   Arguments: 'spawnclient 150 154'
+[2025-02-05 08:19:19Z INFO ProcessInvokerWrapper]   Working directory: '/home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner/bin'
+[2025-02-05 08:19:19Z INFO ProcessInvokerWrapper]   Require exit code zero: 'False'
+[2025-02-05 08:19:19Z INFO ProcessInvokerWrapper]   Encoding web name:  ; code page: ''
+[2025-02-05 08:19:19Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'True'
+[2025-02-05 08:19:19Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2025-02-05 08:19:19Z INFO ProcessInvokerWrapper]   Persist current code page: 'False'
+[2025-02-05 08:19:19Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2025-02-05 08:19:19Z INFO ProcessInvokerWrapper]   High priority process: 'True'
+[2025-02-05 08:19:19Z INFO ProcessInvokerWrapper] Process started with process id 135266, waiting for process exit.
+[2025-02-05 08:19:19Z INFO JobDispatcher] Send job request message to worker for job a047640a-23da-5e9b-1ef8-917a09b3753a.
+[2025-02-05 08:19:19Z INFO ProcessChannel] Sending message of length 27113, with hash '188c284d3db5ec7bc80f6169c5fbe13e25ade57967e22566863e80fe52bdcb22'
+[2025-02-05 08:19:19Z INFO JobNotification] Entering JobStarted Notification
+[2025-02-05 08:19:19Z INFO JobNotification] Entering StartMonitor
+[2025-02-05 08:20:19Z INFO JobDispatcher] Successfully renew job request 17, job is valid till 05/02/2025 8:30:19 am
+[2025-02-05 08:21:20Z INFO JobDispatcher] Successfully renew job request 17, job is valid till 05/02/2025 8:31:20 am
+[2025-02-05 08:22:20Z INFO JobDispatcher] Successfully renew job request 17, job is valid till 05/02/2025 8:32:20 am
+[2025-02-05 08:23:20Z INFO JobDispatcher] Successfully renew job request 17, job is valid till 05/02/2025 8:33:20 am
+[2025-02-05 08:24:20Z INFO JobDispatcher] Successfully renew job request 17, job is valid till 05/02/2025 8:34:20 am
+[2025-02-05 08:25:20Z INFO JobDispatcher] Successfully renew job request 17, job is valid till 05/02/2025 8:35:20 am
+[2025-02-05 08:26:21Z INFO JobDispatcher] Successfully renew job request 17, job is valid till 05/02/2025 8:36:21 am
+[2025-02-05 08:27:21Z INFO JobDispatcher] Successfully renew job request 17, job is valid till 05/02/2025 8:37:21 am
+[2025-02-05 08:28:21Z INFO JobDispatcher] Successfully renew job request 17, job is valid till 05/02/2025 8:38:21 am
+[2025-02-05 08:29:21Z INFO JobDispatcher] Successfully renew job request 17, job is valid till 05/02/2025 8:39:21 am
+[2025-02-05 08:30:22Z INFO JobDispatcher] Successfully renew job request 17, job is valid till 05/02/2025 8:40:22 am
+[2025-02-05 08:31:22Z INFO JobDispatcher] Successfully renew job request 17, job is valid till 05/02/2025 8:41:22 am
+[2025-02-05 08:32:22Z INFO JobDispatcher] Successfully renew job request 17, job is valid till 05/02/2025 8:42:22 am
+[2025-02-05 08:33:22Z INFO JobDispatcher] Successfully renew job request 17, job is valid till 05/02/2025 8:43:22 am
+[2025-02-05 08:34:22Z INFO JobDispatcher] Successfully renew job request 17, job is valid till 05/02/2025 8:44:22 am
+[2025-02-05 08:34:29Z INFO MessageListener] Message '5284092120683930308' received from session '2baf31c0-4db7-46c1-97b2-a116f4c9c459'.
+[2025-02-05 08:34:29Z INFO JobDispatcher] Job cancellation request a047640a-23da-5e9b-1ef8-917a09b3753a received, cancellation timeout 5 minutes.
+[2025-02-05 08:34:29Z INFO JobDispatcher] Send job cancellation message to worker for job a047640a-23da-5e9b-1ef8-917a09b3753a.
+[2025-02-05 08:34:29Z INFO ProcessChannel] Sending message of length 0, with hash 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'
+[2025-02-05 08:34:43Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2025-02-05 08:34:43Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2025-02-05 08:34:43Z INFO ProcessInvokerWrapper] Finished process 135266 with exit code 103, and elapsed time 00:15:23.8659814.
+[2025-02-05 08:34:43Z INFO JobDispatcher] finish job request for job a047640a-23da-5e9b-1ef8-917a09b3753a with result: Canceled
+[2025-02-05 08:34:43Z INFO Terminal] WRITE LINE: 2025-02-05 08:34:43Z: Job full-test completed with result: Canceled
+[2025-02-05 08:34:43Z INFO JobDispatcher] Stop renew job request for job a047640a-23da-5e9b-1ef8-917a09b3753a.
+[2025-02-05 08:34:43Z INFO JobDispatcher] job renew has been cancelled, stop renew job request 17.
+[2025-02-05 08:34:43Z INFO JobNotification] Entering JobCompleted Notification
+[2025-02-05 08:34:43Z INFO JobNotification] Entering EndMonitor
+[2025-02-05 08:34:43Z INFO MessageListener] Received job status event. JobState: Online
+[2025-02-05 08:34:44Z INFO MessageListener] Message '4675151766263464411' received from session '2baf31c0-4db7-46c1-97b2-a116f4c9c459'.
+[2025-02-05 08:34:44Z INFO ConfigurationStore] HasCredentials()
+[2025-02-05 08:34:44Z INFO ConfigurationStore] stored True
+[2025-02-05 08:34:44Z INFO CredentialManager] GetCredentialProvider
+[2025-02-05 08:34:44Z INFO CredentialManager] Creating type OAuth
+[2025-02-05 08:34:44Z INFO CredentialManager] Creating credential type: OAuth
+[2025-02-05 08:34:44Z INFO RSAFileKeyManager] Loading RSA key parameters from file /home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner/.credentials_rsaparams
+[2025-02-05 08:34:44Z INFO ActionsRunServer] EstablishVssConnection
+[2025-02-05 08:34:44Z INFO ActionsRunServer] Establish connection with 100 seconds timeout.
+[2025-02-05 08:34:44Z INFO GitHubActionsService] Starting operation Location.GetConnectionData
+[2025-02-05 08:34:45Z INFO GitHubActionsService] Finished operation Location.GetConnectionData
+[2025-02-05 08:34:45Z INFO RSAFileKeyManager] Loading RSA key parameters from file /home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner/.credentials_rsaparams
+[2025-02-05 08:34:45Z INFO RSAFileKeyManager] Loading RSA key parameters from file /home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner/.credentials_rsaparams
+[2025-02-05 08:34:45Z INFO GitHubActionsService] AAD Correlation ID for this token request: Unknown
+[2025-02-05 08:34:46Z INFO JobDispatcher] Job request 18 for plan bf5a318f-4f61-4830-ad0c-9f2c8afddf37 job 0e10f8dd-85b5-5bee-19c6-47fc7db6f171 received.
+[2025-02-05 08:34:46Z INFO JobDispatcher] Pull OrchestrationId bf5a318f-4f61-4830-ad0c-9f2c8afddf37.unit-test.__default from JWT claims
+[2025-02-05 08:34:46Z INFO MessageListener] Received job status event. JobState: Busy
+[2025-02-05 08:34:46Z INFO MessageListener] _getMessagesTokenSource is already disposed.
+[2025-02-05 08:34:46Z INFO JobDispatcher] Job request a047640a-23da-5e9b-1ef8-917a09b3753a processed succeed.
+[2025-02-05 08:34:46Z INFO Terminal] WRITE LINE: 2025-02-05 08:34:46Z: Running job: unit-test
+[2025-02-05 08:34:46Z INFO JobDispatcher] Start renew job request 18 for job 0e10f8dd-85b5-5bee-19c6-47fc7db6f171.
+[2025-02-05 08:34:46Z INFO JobDispatcher] Successfully renew job request 18, job is valid till 05/02/2025 8:44:46 am
+[2025-02-05 08:34:46Z INFO HostContext] Well known directory 'Bin': '/home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner/bin'
+[2025-02-05 08:34:46Z INFO ProcessInvokerWrapper] Starting process:
+[2025-02-05 08:34:46Z INFO ProcessInvokerWrapper]   File name: '/home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner/bin/Runner.Worker'
+[2025-02-05 08:34:46Z INFO ProcessInvokerWrapper]   Arguments: 'spawnclient 143 152'
+[2025-02-05 08:34:46Z INFO ProcessInvokerWrapper]   Working directory: '/home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner/bin'
+[2025-02-05 08:34:46Z INFO ProcessInvokerWrapper]   Require exit code zero: 'False'
+[2025-02-05 08:34:46Z INFO ProcessInvokerWrapper]   Encoding web name:  ; code page: ''
+[2025-02-05 08:34:46Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'True'
+[2025-02-05 08:34:46Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2025-02-05 08:34:46Z INFO ProcessInvokerWrapper]   Persist current code page: 'False'
+[2025-02-05 08:34:46Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2025-02-05 08:34:46Z INFO ProcessInvokerWrapper]   High priority process: 'True'
+[2025-02-05 08:34:46Z INFO ProcessInvokerWrapper] Process started with process id 145009, waiting for process exit.
+[2025-02-05 08:34:46Z INFO JobDispatcher] Send job request message to worker for job 0e10f8dd-85b5-5bee-19c6-47fc7db6f171.
+[2025-02-05 08:34:46Z INFO ProcessChannel] Sending message of length 27752, with hash '69a90fe95ebba266c039c740548f9a85904b348f0d33c568d9e22306bb6cae11'
+[2025-02-05 08:34:46Z INFO JobNotification] Entering JobStarted Notification
+[2025-02-05 08:34:46Z INFO JobNotification] Entering StartMonitor
+[2025-02-05 08:35:07Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2025-02-05 08:35:07Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2025-02-05 08:35:07Z INFO ProcessInvokerWrapper] Finished process 145009 with exit code 102, and elapsed time 00:00:21.3273755.
+[2025-02-05 08:35:07Z INFO JobDispatcher] Worker finished for job 0e10f8dd-85b5-5bee-19c6-47fc7db6f171. Code: 102
+[2025-02-05 08:35:07Z INFO JobDispatcher] finish job request for job 0e10f8dd-85b5-5bee-19c6-47fc7db6f171 with result: Failed
+[2025-02-05 08:35:07Z INFO Terminal] WRITE LINE: 2025-02-05 08:35:07Z: Job unit-test completed with result: Failed
+[2025-02-05 08:35:07Z INFO JobDispatcher] Stop renew job request for job 0e10f8dd-85b5-5bee-19c6-47fc7db6f171.
+[2025-02-05 08:35:07Z INFO JobDispatcher] job renew has been cancelled, stop renew job request 18.
+[2025-02-05 08:35:07Z INFO JobNotification] Entering JobCompleted Notification
+[2025-02-05 08:35:07Z INFO JobNotification] Entering EndMonitor
+[2025-02-05 08:35:07Z INFO MessageListener] Received job status event. JobState: Online
+[2025-02-05 08:35:08Z INFO MessageListener] Message '3927122576647211865' received from session '2baf31c0-4db7-46c1-97b2-a116f4c9c459'.
+[2025-02-05 08:35:08Z INFO ConfigurationStore] HasCredentials()
+[2025-02-05 08:35:08Z INFO ConfigurationStore] stored True
+[2025-02-05 08:35:08Z INFO CredentialManager] GetCredentialProvider
+[2025-02-05 08:35:08Z INFO CredentialManager] Creating type OAuth
+[2025-02-05 08:35:08Z INFO CredentialManager] Creating credential type: OAuth
+[2025-02-05 08:35:08Z INFO RSAFileKeyManager] Loading RSA key parameters from file /home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner/.credentials_rsaparams
+[2025-02-05 08:35:08Z INFO ActionsRunServer] EstablishVssConnection
+[2025-02-05 08:35:08Z INFO ActionsRunServer] Establish connection with 100 seconds timeout.
+[2025-02-05 08:35:08Z INFO GitHubActionsService] Starting operation Location.GetConnectionData
+[2025-02-05 08:35:08Z INFO GitHubActionsService] Finished operation Location.GetConnectionData
+[2025-02-05 08:35:08Z INFO RSAFileKeyManager] Loading RSA key parameters from file /home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner/.credentials_rsaparams
+[2025-02-05 08:35:08Z INFO RSAFileKeyManager] Loading RSA key parameters from file /home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner/.credentials_rsaparams
+[2025-02-05 08:35:09Z INFO GitHubActionsService] AAD Correlation ID for this token request: Unknown
+[2025-02-05 08:35:09Z INFO JobDispatcher] Job request 19 for plan bf5a318f-4f61-4830-ad0c-9f2c8afddf37 job a047640a-23da-5e9b-1ef8-917a09b3753a received.
+[2025-02-05 08:35:09Z INFO JobDispatcher] Pull OrchestrationId bf5a318f-4f61-4830-ad0c-9f2c8afddf37.full-test.__default from JWT claims
+[2025-02-05 08:35:09Z INFO MessageListener] Received job status event. JobState: Busy
+[2025-02-05 08:35:09Z INFO MessageListener] _getMessagesTokenSource is already disposed.
+[2025-02-05 08:35:09Z INFO JobDispatcher] Job request 0e10f8dd-85b5-5bee-19c6-47fc7db6f171 processed succeed.
+[2025-02-05 08:35:09Z INFO Terminal] WRITE LINE: 2025-02-05 08:35:09Z: Running job: full-test
+[2025-02-05 08:35:09Z INFO JobDispatcher] Start renew job request 19 for job a047640a-23da-5e9b-1ef8-917a09b3753a.
+[2025-02-05 08:35:09Z INFO JobDispatcher] Successfully renew job request 19, job is valid till 05/02/2025 8:45:09 am
+[2025-02-05 08:35:09Z INFO HostContext] Well known directory 'Bin': '/home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner/bin'
+[2025-02-05 08:35:09Z INFO ProcessInvokerWrapper] Starting process:
+[2025-02-05 08:35:09Z INFO ProcessInvokerWrapper]   File name: '/home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner/bin/Runner.Worker'
+[2025-02-05 08:35:09Z INFO ProcessInvokerWrapper]   Arguments: 'spawnclient 149 153'
+[2025-02-05 08:35:09Z INFO ProcessInvokerWrapper]   Working directory: '/home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner/bin'
+[2025-02-05 08:35:09Z INFO ProcessInvokerWrapper]   Require exit code zero: 'False'
+[2025-02-05 08:35:09Z INFO ProcessInvokerWrapper]   Encoding web name:  ; code page: ''
+[2025-02-05 08:35:09Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'True'
+[2025-02-05 08:35:09Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2025-02-05 08:35:09Z INFO ProcessInvokerWrapper]   Persist current code page: 'False'
+[2025-02-05 08:35:09Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2025-02-05 08:35:09Z INFO ProcessInvokerWrapper]   High priority process: 'True'
+[2025-02-05 08:35:09Z INFO ProcessInvokerWrapper] Process started with process id 145697, waiting for process exit.
+[2025-02-05 08:35:09Z INFO JobDispatcher] Send job request message to worker for job a047640a-23da-5e9b-1ef8-917a09b3753a.
+[2025-02-05 08:35:09Z INFO ProcessChannel] Sending message of length 27754, with hash '8650b7991506a96c8c2c0a52fe5b75b4b88473a943081f37b32d2d4734ea80e4'
+[2025-02-05 08:35:09Z INFO JobNotification] Entering JobStarted Notification
+[2025-02-05 08:35:09Z INFO JobNotification] Entering StartMonitor
+[2025-02-05 08:35:27Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2025-02-05 08:35:27Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2025-02-05 08:35:27Z INFO ProcessInvokerWrapper] Finished process 145697 with exit code 102, and elapsed time 00:00:17.7790055.
+[2025-02-05 08:35:27Z INFO JobDispatcher] Worker finished for job a047640a-23da-5e9b-1ef8-917a09b3753a. Code: 102
+[2025-02-05 08:35:27Z INFO JobDispatcher] finish job request for job a047640a-23da-5e9b-1ef8-917a09b3753a with result: Failed
+[2025-02-05 08:35:27Z INFO Terminal] WRITE LINE: 2025-02-05 08:35:27Z: Job full-test completed with result: Failed
+[2025-02-05 08:35:27Z INFO JobDispatcher] Stop renew job request for job a047640a-23da-5e9b-1ef8-917a09b3753a.
+[2025-02-05 08:35:27Z INFO JobDispatcher] job renew has been cancelled, stop renew job request 19.
+[2025-02-05 08:35:27Z INFO JobNotification] Entering JobCompleted Notification
+[2025-02-05 08:35:27Z INFO JobNotification] Entering EndMonitor
+[2025-02-05 08:35:27Z INFO MessageListener] Received job status event. JobState: Online
+[2025-02-05 08:35:51Z INFO Terminal] WRITE LINE: Exiting...
+[2025-02-05 08:35:51Z INFO ConfigurationStore] IsServiceConfigured()
+[2025-02-05 08:35:51Z INFO ConfigurationStore] IsServiceConfigured: False
+[2025-02-05 08:35:51Z INFO HostContext] Runner will be shutdown for UserCancelled
+[2025-02-05 08:35:51Z WARN GitHubActionsService] GET request to https://broker.actions.githubusercontent.com/message?sessionId=2baf31c0-4db7-46c1-97b2-a116f4c9c459&status=Busy&runnerVersion=2.322.0&os=Linux&architecture=X64&disableUpdate=false has been cancelled.
+[2025-02-05 08:35:51Z ERR  BrokerServer] Catch exception during request
+[2025-02-05 08:35:51Z ERR  BrokerServer] System.Threading.Tasks.TaskCanceledException: The operation was canceled.
+ ---> System.Threading.Tasks.TaskCanceledException: The operation was canceled.
+ ---> System.IO.IOException: Unable to read data from the transport connection: Operation canceled.
+ ---> System.Net.Sockets.SocketException (125): Operation canceled
+   --- End of inner exception stack trace ---
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource<System.Int32>.GetResult(Int16 token)
+   at System.Net.Security.SslStream.EnsureFullTlsFrameAsync[TIOAdapter](CancellationToken cancellationToken, Int32 estimatedSize)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at System.Net.Security.SslStream.ReadAsyncInternal[TIOAdapter](Memory`1 buffer, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.AuthenticationHelper.SendWithNtAuthAsync(HttpRequestMessage request, Uri authUri, Boolean async, ICredentials credentials, Boolean isProxyAuth, HttpConnection connection, HttpConnectionPool connectionPool, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.AuthenticationHelper.SendWithAuthAsync(HttpRequestMessage request, Uri authUri, Boolean async, ICredentials credentials, Boolean preAuthenticate, Boolean isProxyAuth, Boolean doRequestAuth, HttpConnectionPool pool, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at GitHub.Services.Common.RawHttpMessageHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at GitHub.Services.Common.VssHttpRetryMessageHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpClient.HandleFailure(Exception e, Boolean telemetryStarted, HttpResponseMessage response, CancellationTokenSource cts, CancellationToken cancellationToken, CancellationTokenSource pendingRequestsCts)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at Sdk.WebApi.WebApi.RawHttpClientBase.SendAsync(HttpRequestMessage message, HttpCompletionOption completionOption, Object userState, CancellationToken cancellationToken)
+   at Sdk.WebApi.WebApi.RawHttpClientBase.SendAsync[T](HttpRequestMessage message, Boolean readErrorBody, Object userState, CancellationToken cancellationToken)
+   at Sdk.WebApi.WebApi.RawHttpClientBase.SendAsync[T](HttpMethod method, IEnumerable`1 additionalHeaders, Uri requestUri, HttpContent content, IEnumerable`1 queryParameters, Boolean readErrorBody, Object userState, CancellationToken cancellationToken)
+   at GitHub.Actions.RunService.WebApi.BrokerHttpClient.GetRunnerMessageAsync(Nullable`1 sessionId, String runnerVersion, Nullable`1 status, String os, String architecture, Nullable`1 disableUpdate, CancellationToken cancellationToken)
+   at GitHub.Runner.Common.BrokerServer.<>c__DisplayClass7_0.<<GetRunnerMessageAsync>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at GitHub.Runner.Common.RunnerService.RetryRequest[T](Func`1 func, CancellationToken cancellationToken, Int32 maxRetryAttemptsCount, Func`2 shouldRetry)
+[2025-02-05 08:35:51Z ERR  BrokerServer] #####################################################
+[2025-02-05 08:35:51Z ERR  BrokerServer] System.Threading.Tasks.TaskCanceledException: The operation was canceled.
+ ---> System.IO.IOException: Unable to read data from the transport connection: Operation canceled.
+ ---> System.Net.Sockets.SocketException (125): Operation canceled
+   --- End of inner exception stack trace ---
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource<System.Int32>.GetResult(Int16 token)
+   at System.Net.Security.SslStream.EnsureFullTlsFrameAsync[TIOAdapter](CancellationToken cancellationToken, Int32 estimatedSize)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at System.Net.Security.SslStream.ReadAsyncInternal[TIOAdapter](Memory`1 buffer, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.AuthenticationHelper.SendWithNtAuthAsync(HttpRequestMessage request, Uri authUri, Boolean async, ICredentials credentials, Boolean isProxyAuth, HttpConnection connection, HttpConnectionPool connectionPool, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.AuthenticationHelper.SendWithAuthAsync(HttpRequestMessage request, Uri authUri, Boolean async, ICredentials credentials, Boolean preAuthenticate, Boolean isProxyAuth, Boolean doRequestAuth, HttpConnectionPool pool, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at GitHub.Services.Common.RawHttpMessageHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at GitHub.Services.Common.VssHttpRetryMessageHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+[2025-02-05 08:35:51Z ERR  BrokerServer] #####################################################
+[2025-02-05 08:35:51Z ERR  BrokerServer] System.IO.IOException: Unable to read data from the transport connection: Operation canceled.
+ ---> System.Net.Sockets.SocketException (125): Operation canceled
+   --- End of inner exception stack trace ---
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource<System.Int32>.GetResult(Int16 token)
+   at System.Net.Security.SslStream.EnsureFullTlsFrameAsync[TIOAdapter](CancellationToken cancellationToken, Int32 estimatedSize)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at System.Net.Security.SslStream.ReadAsyncInternal[TIOAdapter](Memory`1 buffer, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+[2025-02-05 08:35:51Z ERR  BrokerServer] #####################################################
+[2025-02-05 08:35:51Z ERR  BrokerServer] System.Net.Sockets.SocketException (125): Operation canceled
+[2025-02-05 08:35:51Z WARN BrokerServer] Back off 5.013 seconds before next retry. 4 attempt left.
+[2025-02-05 08:35:51Z INFO MessageListener] Get next message has been cancelled.
+[2025-02-05 08:35:51Z INFO JobDispatcher] Shutting down JobDispatcher. Make sure all WorkerDispatcher has finished.
+[2025-02-05 08:35:51Z INFO JobDispatcher] Ensure WorkerDispatcher for job a047640a-23da-5e9b-1ef8-917a09b3753a run to finish, cancel any running job.
+[2025-02-05 08:35:51Z INFO JobDispatcher] Job request a047640a-23da-5e9b-1ef8-917a09b3753a processed succeed.
+[2025-02-05 08:35:51Z INFO Runner] Deleting Runner Session...
+[2025-02-05 08:35:51Z INFO Listener] Runner execution been cancelled.

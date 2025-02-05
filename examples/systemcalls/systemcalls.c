@@ -1,4 +1,11 @@
 #include "systemcalls.h"
+#include <syslog.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 
 /**
  * @param cmd the command to execute with system()
@@ -17,7 +24,17 @@ bool do_system(const char *cmd)
  *   or false() if it returned a failure
 */
 
-    return true;
+    if(cmd == NULL){
+    
+	    syslog(LOG_DEBUG, "Invalid command\n");
+	    return false;
+    
+    }
+    
+    bool success = (system(cmd)==0)?true:false;
+
+    return(success);
+
 }
 
 /**
@@ -47,7 +64,7 @@ bool do_exec(int count, ...)
     command[count] = NULL;
     // this line is to avoid a compile warning before your implementation is complete
     // and may be removed
-    command[count] = command[count];
+    // command[count] = command[count];
 
 /*
  * TODO:
@@ -58,7 +75,42 @@ bool do_exec(int count, ...)
  *   as second argument to the execv() command.
  *
 */
+    openlog(NULL, 0, LOG_USER);
+    
+    // Fork the Process
+    int child_pid = fork();
+    
+    // Check if fork was successful. If not raise an error.
+    if(child_pid == -1){
+        syslog(LOG_ERR, "Failed to fork process....\n");
+	return(false);
+    }
+    if(child_pid == 0){
+	    // If fork() was successful, try execv() command.
+	    if(execv(command[0], command)){
+		    syslog(LOG_ERR, "Failed to execute system process\n");
+		    exit(1); 
+	    }
+    }
+    // if execv() doesn't return, wait for the child process to finish executing.
+    else{
 
+	int return_status;
+	
+	// wait for child process to finish normally, and save the return status in "return_status" variable.
+        waitpid(child_pid,&return_status, 0);
+
+        if(return_status != 0){
+            syslog(LOG_ERR, "Execution for pid:%d failed with return code: %d\n", child_pid, return_status);
+            return(false);
+        }
+
+        syslog(LOG_DEBUG, "Process execution for pid:%d completed successfuly\n",child_pid);
+
+    }
+    
+    closelog();
+    
     va_end(args);
 
     return true;
@@ -82,7 +134,7 @@ bool do_exec_redirect(const char *outputfile, int count, ...)
     command[count] = NULL;
     // this line is to avoid a compile warning before your implementation is complete
     // and may be removed
-    command[count] = command[count];
+    //command[count] = command[count];
 
 
 /*
@@ -92,6 +144,61 @@ bool do_exec_redirect(const char *outputfile, int count, ...)
  *   The rest of the behaviour is same as do_exec()
  *
 */
+
+    openlog(NULL, 0, LOG_USER);
+    
+    // Open a file descriptor to redirect the standard out.
+    int fd = open(outputfile, (O_WRONLY | O_CREAT), 0644);
+    
+    if(fd < 0){
+        syslog(LOG_ERR, "Could not open/create outputfile...\n");
+        return(false);       
+    }
+    
+    // Fork the Process
+    int child_pid = fork();
+    
+    // Check if fork was successful. If not raise an error.
+    if(child_pid == -1){
+        syslog(LOG_ERR, "Failed to fork process....\n");
+	return(false);
+    }
+
+    if(child_pid == 0){
+		// Try to redirect the standard out to outputfile 
+	    if (dup2(fd, 1) < 0){
+		syslog(LOG_ERR, "Could not redirect STDOUT to file...\n");
+		return(false);
+	    }
+	    
+	    close(fd);
+	    
+	    // If fork() was successful, try execv() command.
+	    if(execv(command[0], command)){
+		    syslog(LOG_ERR, "Failed to execute system process\n");
+		    exit(1); 
+	    }
+    }
+
+    // if execv() doesn't return, wait for the child process to finish executing.
+    else{
+
+	int return_status;
+	
+	// wait for child process to finish normally, and save the return status in "return_status" variable.
+        waitpid(child_pid,&return_status,0);
+
+        if(return_status != 0){
+            syslog(LOG_ERR, "Execution for pid:%d failed with return code: %d\n", child_pid, return_status);
+            return(false);
+        }
+
+        syslog(LOG_DEBUG, "Process execution for pid:%d completed successfuly\n",child_pid);
+
+    }
+    
+    closelog();
+
 
     va_end(args);
 
