@@ -86,7 +86,7 @@ bool do_exec(int count, ...)
 	return(false);
     }
     // If fork() was successful, try execv() command.
-    else if(execv(command[0], &command[1])){
+    else if(execv(command[0], command)){
 	    syslog(LOG_ERR, "Failed to execute system process\n");
 	    return(false); 
     }
@@ -171,7 +171,7 @@ bool do_exec_redirect(const char *outputfile, int count, ...)
     close(fd);
     
     // If fork() was successful, try execv() command.
-    if(execv(command[0], &command[1])){
+    if(execv(command[0], command)){
 	    syslog(LOG_ERR, "Failed to execute system process\n");
 	    return(false); 
     }
