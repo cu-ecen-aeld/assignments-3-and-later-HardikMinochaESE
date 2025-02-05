@@ -45,7 +45,7 @@ fi
 
 echo "Adding the Image in outdir"
 mkdir -p ${OUTDIR}/Image
-cp ${OUTDIR}/linux-stable/* ${OUTDIR}/Image
+cp -r ${OUTDIR}/linux-stable/* ${OUTDIR}/Image
 
 echo "Creating the staging directory for the root filesystem"
 cd "$OUTDIR"
