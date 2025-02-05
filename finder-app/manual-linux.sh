@@ -12,6 +12,7 @@ BUSYBOX_VERSION=1_33_1
 FINDER_APP_DIR=$(realpath $(dirname $0))
 ARCH=arm64
 CROSS_COMPILE=aarch64-none-linux-gnu-
+WRITER_APP=/home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/finder-app
 
 if [ $# -lt 1 ]
 then
@@ -35,6 +36,13 @@ if [ ! -e ${OUTDIR}/linux-stable/arch/${ARCH}/boot/Image ]; then
     git checkout ${KERNEL_VERSION}
 
     # TODO: Add your kernel build steps here
+    
+    # Clean the build environment.
+    make ARCH=${ARCH} CROSS_COMPILE=${CROSS_COMPILE} mrproper
+    # Configure the kernel using default settings.
+    make ARCH=${ARCH} CROSS_COMPILE=${CROSS_COMPILE} defconfig
+    # Build the kernel using all avialable processors.
+    make ARCH=${ARCH} CROSS_COMPILE=${CROSS_COMPILE} -j$nproc 
 fi
 
 echo "Adding the Image in outdir"
@@ -48,6 +56,9 @@ then
 fi
 
 # TODO: Create necessary base directories
+echo "Creating ${OUTDIR}/rootfs and base directories based on FHS" 
+mkdir -p ${OUTDIR}/rootfs/{bin,dev,etc,home,lib,lib64,proc,sbin,sys,tmp,usr/{bin,lib,sbin},var/{log}}
+
 
 cd "$OUTDIR"
 if [ ! -d "${OUTDIR}/busybox" ]
@@ -55,12 +66,19 @@ then
 git clone git://busybox.net/busybox.git
     cd busybox
     git checkout ${BUSYBOX_VERSION}
+    
     # TODO:  Configure busybox
+    make distclean
+    make defconfig
+
 else
     cd busybox
 fi
 
 # TODO: Make and install busybox
+make ARCH=${ARCH} CROSS_COMPILE=${CROSS_COMPILE}
+make CONFIG_PREFIX=${OUTDIR}/rootfs ARCH=${ARCH} CROSS_COMPILE=${CROSS_COMPILE} install
+
 
 echo "Library dependencies"
 ${CROSS_COMPILE}readelf -a bin/busybox | grep "program interpreter"
@@ -69,12 +87,26 @@ ${CROSS_COMPILE}readelf -a bin/busybox | grep "Shared library"
 # TODO: Add library dependencies to rootfs
 
 # TODO: Make device nodes
+# Create device nodes for null and console
+sudo mknod ${OUTDIR}/initramfs/dev/null c 1 3
+sudo mknod ${OUTDIR}/initramfs/dev/console c 5 1
 
 # TODO: Clean and build the writer utility
+cd ${WRITER_APP}
+make clean
+make ARCH=${ARCH} CROSS_COMPILE=${CROSS_COMPILE}
+cp writer ${OUTDIR}/rootfs/home
 
 # TODO: Copy the finder related scripts and executables to the /home directory
 # on the target rootfs
+cp finder.sh conf/username.txt conf/assignment.txt finder-test.sh ${OUTDIR}/rootfs/home
+cp autorun-qemu.sh ${OUTDIR}/rootfs/home
 
 # TODO: Chown the root directory
+cd ${OUTDIR}/rootfs
+sudo chown -R root:root *
 
 # TODO: Create initramfs.cpio.gz
+cd ${OUTDIR}/rootfs
+find . | cpio -H newc -ov --owner root:root > ${OUTDIR}/initramfs.cpio
+gzip -f initramfs.cpio
