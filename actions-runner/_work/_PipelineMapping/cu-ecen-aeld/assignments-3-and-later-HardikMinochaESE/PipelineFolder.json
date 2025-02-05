@@ -1,0 +1,12 @@
+﻿{
+  "repositoryName": "cu-ecen-aeld/assignments-3-and-later-HardikMinochaESE",
+  "pipelineDirectory": "assignments-3-and-later-HardikMinochaESE",
+  "workspaceDirectory": "assignments-3-and-later-HardikMinochaESE/assignments-3-and-later-HardikMinochaESE",
+  "repositories": {
+    "cu-ecen-aeld/assignments-3-and-later-HardikMinochaESE": {
+      "repositoryPath": "assignments-3-and-later-HardikMinochaESE/assignments-3-and-later-HardikMinochaESE",
+      "lastRunOn": "02/02/2025 18:14:26 -07:00"
+    }
+  },
+  "lastRunOn": "02/02/2025 18:14:26 -07:00"
+}
