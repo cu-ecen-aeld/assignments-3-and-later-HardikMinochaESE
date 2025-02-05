@@ -36,12 +36,8 @@ if [ ! -e ${OUTDIR}/linux-stable/arch/${ARCH}/boot/Image ]; then
     git checkout ${KERNEL_VERSION}
 
     # TODO: Add your kernel build steps here
-    
-    # Clean the build environment.
     make ARCH=${ARCH} CROSS_COMPILE=${CROSS_COMPILE} mrproper
-    # Configure the kernel using default settings.
     make ARCH=${ARCH} CROSS_COMPILE=${CROSS_COMPILE} defconfig
-    # Build the kernel using all avialable processors.
     make ARCH=${ARCH} CROSS_COMPILE=${CROSS_COMPILE} -j$nproc 
 fi
 
@@ -85,11 +81,12 @@ ${CROSS_COMPILE}readelf -a bin/busybox | grep "program interpreter"
 ${CROSS_COMPILE}readelf -a bin/busybox | grep "Shared library"
 
 # TODO: Add library dependencies to rootfs
+cp /lib/ld-linux-aarch64.so.1 ${OUTDIR}/rootfs
+cp /lib64/libm.so.6 /lib64/libresolv.so.2 /lib64/libc.so.6 ${OUTDIR}/rootfs 
 
 # TODO: Make device nodes
-# Create device nodes for null and console
-sudo mknod ${OUTDIR}/initramfs/dev/null c 1 3
-sudo mknod ${OUTDIR}/initramfs/dev/console c 5 1
+sudo mknod ${OUTDIR}/rootfs/dev/null c 1 3
+sudo mknod ${OUTDIR}/rootfs/dev/console c 5 1
 
 # TODO: Clean and build the writer utility
 cd ${WRITER_APP}
