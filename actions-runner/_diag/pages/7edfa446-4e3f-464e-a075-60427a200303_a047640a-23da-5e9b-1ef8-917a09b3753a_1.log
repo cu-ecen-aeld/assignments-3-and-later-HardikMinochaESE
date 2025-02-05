@@ -1,0 +1,705 @@
+﻿2025-02-05T08:19:22.4619175Z Current runner version: '2.322.0'
+2025-02-05T08:19:22.4641451Z Runner name: 'AESD-3'
+2025-02-05T08:19:22.4642464Z Runner group name: 'Default'
+2025-02-05T08:19:22.4643518Z Machine name: 'Ubuntu'
+2025-02-05T08:19:22.4649808Z ##[group]GITHUB_TOKEN Permissions
+2025-02-05T08:19:22.4662237Z Actions: write
+2025-02-05T08:19:22.4662804Z Attestations: write
+2025-02-05T08:19:22.4663276Z Checks: write
+2025-02-05T08:19:22.4663722Z Contents: write
+2025-02-05T08:19:22.4664177Z Deployments: write
+2025-02-05T08:19:22.4664644Z Discussions: write
+2025-02-05T08:19:22.4665102Z Issues: write
+2025-02-05T08:19:22.4665529Z Metadata: read
+2025-02-05T08:19:22.4665989Z Packages: write
+2025-02-05T08:19:22.4666447Z Pages: write
+2025-02-05T08:19:22.4666893Z PullRequests: write
+2025-02-05T08:19:22.4667826Z RepositoryProjects: write
+2025-02-05T08:19:22.4668382Z SecurityEvents: write
+2025-02-05T08:19:22.4668857Z Statuses: write
+2025-02-05T08:19:22.4669308Z ##[endgroup]
+2025-02-05T08:19:22.4682944Z Secret source: Actions
+2025-02-05T08:19:22.4687035Z Prepare workflow directory
+2025-02-05T08:19:22.6658871Z Prepare all required actions
+2025-02-05T08:19:22.6790942Z Getting action download info
+2025-02-05T08:19:22.9471959Z Download action repository 'actions/checkout@v2' (SHA:ee0669bd1cc54295c223e0bb666b733df41de1c5)
+2025-02-05T08:19:26.1068544Z Complete job name: full-test
+2025-02-05T08:19:26.4393937Z ##[group]Checking docker version
+2025-02-05T08:19:26.4502180Z ##[command]/usr/bin/docker version --format '{{.Server.APIVersion}}'
+2025-02-05T08:19:26.5883194Z '1.47'
+2025-02-05T08:19:26.5983286Z Docker daemon API version: '1.47'
+2025-02-05T08:19:26.5983983Z ##[command]/usr/bin/docker version --format '{{.Client.APIVersion}}'
+2025-02-05T08:19:26.7300767Z '1.47'
+2025-02-05T08:19:26.7369887Z Docker client API version: '1.47'
+2025-02-05T08:19:26.7391454Z ##[endgroup]
+2025-02-05T08:19:26.7417540Z ##[group]Clean up resources from previous jobs
+2025-02-05T08:19:26.7466237Z ##[command]/usr/bin/docker ps --all --quiet --no-trunc --filter "label=a4cec2"
+2025-02-05T08:19:26.8107939Z ##[command]/usr/bin/docker network prune --force --filter "label=a4cec2"
+2025-02-05T08:19:26.9457950Z ##[endgroup]
+2025-02-05T08:19:26.9458525Z ##[group]Create local container network
+2025-02-05T08:19:26.9503882Z ##[command]/usr/bin/docker network create --label a4cec2 github_network_d12314f846f3474c87ad1bb531c91f46
+2025-02-05T08:19:27.3881164Z cd9ace9dced617b64a9530593734fea8e1686f74c12b64c656bf106ba670b793
+2025-02-05T08:19:27.3940856Z ##[endgroup]
+2025-02-05T08:19:27.4067872Z ##[group]Starting job container
+2025-02-05T08:19:27.4121218Z ##[command]/usr/bin/docker pull cuaesd/aesd-autotest:24-assignment3
+2025-02-05T08:19:28.4224298Z 24-assignment3: Pulling from cuaesd/aesd-autotest
+2025-02-05T08:19:28.4248368Z 762bedf4b1b7: Already exists
+2025-02-05T08:19:28.4427116Z b9687bc91919: Already exists
+2025-02-05T08:19:28.4592663Z f4f9e728a419: Already exists
+2025-02-05T08:19:28.4764923Z 9ae3aece70f6: Already exists
+2025-02-05T08:19:28.4943806Z 996db37c1f75: Pulling fs layer
+2025-02-05T08:19:28.4972678Z 0a85aa475dcf: Pulling fs layer
+2025-02-05T08:19:28.4995956Z a9d26899f747: Pulling fs layer
+2025-02-05T08:19:28.5027663Z f3a23d6e2913: Pulling fs layer
+2025-02-05T08:19:28.5028528Z d4055345f003: Pulling fs layer
+2025-02-05T08:19:28.5036901Z f3a23d6e2913: Waiting
+2025-02-05T08:19:29.2975324Z d4055345f003: Waiting
+2025-02-05T08:19:29.2976490Z 0a85aa475dcf: Verifying Checksum
+2025-02-05T08:19:29.2980705Z 0a85aa475dcf: Download complete
+2025-02-05T08:19:30.5355810Z f3a23d6e2913: Verifying Checksum
+2025-02-05T08:19:30.5357990Z f3a23d6e2913: Download complete
+2025-02-05T08:19:33.3423057Z d4055345f003: Verifying Checksum
+2025-02-05T08:19:33.3423990Z d4055345f003: Download complete
+2025-02-05T08:20:52.3811704Z 996db37c1f75: Verifying Checksum
+2025-02-05T08:20:52.3812835Z 996db37c1f75: Download complete
+2025-02-05T08:21:12.5134417Z a9d26899f747: Verifying Checksum
+2025-02-05T08:21:12.5142790Z a9d26899f747: Download complete
+2025-02-05T08:22:24.5172956Z 996db37c1f75: Pull complete
+2025-02-05T08:22:24.6275436Z 0a85aa475dcf: Pull complete
+2025-02-05T08:23:03.0114455Z a9d26899f747: Pull complete
+2025-02-05T08:23:03.0962545Z f3a23d6e2913: Pull complete
+2025-02-05T08:23:03.1840507Z d4055345f003: Pull complete
+2025-02-05T08:23:03.2242825Z Digest: sha256:13ae5ec52f9648c424978c6b3f57d2d739334efc3a1a23c06ecda8a33aa64810
+2025-02-05T08:23:03.2401813Z Status: Downloaded newer image for cuaesd/aesd-autotest:24-assignment3
+2025-02-05T08:23:03.2482922Z docker.io/cuaesd/aesd-autotest:24-assignment3
+2025-02-05T08:23:03.2749905Z ##[command]/usr/bin/docker create --name 1b8a88f0392b4a7ea4bb90994b9742ee_cuaesdaesdautotest24assignment3_a76297 --label a4cec2 --workdir /__w/assignments-3-and-later-HardikMinochaESE/assignments-3-and-later-HardikMinochaESE --network github_network_d12314f846f3474c87ad1bb531c91f46  -e "HOME=/github/home" -e GITHUB_ACTIONS=true -e CI=true -v "/var/run/docker.sock":"/var/run/docker.sock" -v "/home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner/_work":"/__w" -v "/home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner/externals":"/__e":ro -v "/home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner/_work/_temp":"/__w/_temp" -v "/home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner/_work/_actions":"/__w/_actions" -v "/home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner/_work/_tool":"/__w/_tool" -v "/home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner/_work/_temp/_github_home":"/github/home" -v "/home/hardik/Desktop/Assignment-1/assignment-1-HardikMinochaESE-1/actions-runner/_work/_temp/_github_workflow":"/github/workflow" --entrypoint "tail" cuaesd/aesd-autotest:24-assignment3 "-f" "/dev/null"
+2025-02-05T08:23:04.3581794Z 06d38c782c8f49295be37856aa1ad593a42dccb47273615076e72d725993cf1f
+2025-02-05T08:23:04.3804626Z ##[command]/usr/bin/docker start 06d38c782c8f49295be37856aa1ad593a42dccb47273615076e72d725993cf1f
+2025-02-05T08:23:05.2107866Z 06d38c782c8f49295be37856aa1ad593a42dccb47273615076e72d725993cf1f
+2025-02-05T08:23:05.2182607Z ##[command]/usr/bin/docker ps --all --filter id=06d38c782c8f49295be37856aa1ad593a42dccb47273615076e72d725993cf1f --filter status=running --no-trunc --format "{{.ID}} {{.Status}}"
+2025-02-05T08:23:05.2845680Z 06d38c782c8f49295be37856aa1ad593a42dccb47273615076e72d725993cf1f Up Less than a second
+2025-02-05T08:23:05.2927938Z ##[command]/usr/bin/docker inspect --format "{{range .Config.Env}}{{println .}}{{end}}" 06d38c782c8f49295be37856aa1ad593a42dccb47273615076e72d725993cf1f
+2025-02-05T08:23:05.3628620Z HOME=/github/home
+2025-02-05T08:23:05.3636809Z GITHUB_ACTIONS=true
+2025-02-05T08:23:05.3654546Z CI=true
+2025-02-05T08:23:05.3658713Z PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/arm-cross-compiler/install/arm-gnu-toolchain-13.3.rel1-x86_64-aarch64-none-linux-gnu/bin
+2025-02-05T08:23:05.3812756Z ##[endgroup]
+2025-02-05T08:23:05.3889016Z ##[group]Waiting for all services to be ready
+2025-02-05T08:23:05.3904229Z ##[endgroup]
+2025-02-05T08:23:05.5178130Z ##[group]Run actions/checkout@v2
+2025-02-05T08:23:05.5179132Z with:
+2025-02-05T08:23:05.5179506Z   repository: cu-ecen-aeld/assignments-3-and-later-HardikMinochaESE
+2025-02-05T08:23:05.5184124Z   token: ***
+2025-02-05T08:23:05.5184457Z   ssh-strict: true
+2025-02-05T08:23:05.5184737Z   persist-credentials: true
+2025-02-05T08:23:05.5185058Z   clean: true
+2025-02-05T08:23:05.5185369Z   fetch-depth: 1
+2025-02-05T08:23:05.5185638Z   lfs: false
+2025-02-05T08:23:05.5185889Z   submodules: false
+2025-02-05T08:23:05.5190534Z   set-safe-directory: true
+2025-02-05T08:23:05.5193250Z ##[endgroup]
+2025-02-05T08:23:05.5443492Z ##[command]/usr/bin/docker exec  06d38c782c8f49295be37856aa1ad593a42dccb47273615076e72d725993cf1f sh -c "cat /etc/*release | grep ^ID"
+2025-02-05T08:23:06.2636845Z Syncing repository: cu-ecen-aeld/assignments-3-and-later-HardikMinochaESE
+2025-02-05T08:23:06.2638996Z ##[group]Getting Git version info
+2025-02-05T08:23:06.2639712Z Working directory is '/__w/assignments-3-and-later-HardikMinochaESE/assignments-3-and-later-HardikMinochaESE'
+2025-02-05T08:23:06.2643883Z [command]/usr/bin/git version
+2025-02-05T08:23:06.2716871Z git version 2.34.1
+2025-02-05T08:23:06.2794383Z ##[endgroup]
+2025-02-05T08:23:06.2854042Z Temporarily overriding HOME='/__w/_temp/b1a18c2a-5843-4c0e-922b-05c2cf8f1ffb' before making global git config changes
+2025-02-05T08:23:06.2883719Z Adding repository directory to the temporary git global config as a safe directory
+2025-02-05T08:23:06.2888399Z [command]/usr/bin/git config --global --add safe.directory /__w/assignments-3-and-later-HardikMinochaESE/assignments-3-and-later-HardikMinochaESE
+2025-02-05T08:23:06.2978508Z [command]/usr/bin/git config --local --get remote.origin.url
+2025-02-05T08:23:06.3070062Z https://github.com/cu-ecen-aeld/assignments-3-and-later-HardikMinochaESE
+2025-02-05T08:23:06.3140733Z ##[group]Removing previously created refs, to avoid conflicts
+2025-02-05T08:23:06.3150926Z [command]/usr/bin/git rev-parse --symbolic-full-name --verify --quiet HEAD
+2025-02-05T08:23:06.3229216Z refs/heads/main
+2025-02-05T08:23:06.3264585Z [command]/usr/bin/git checkout --detach
+2025-02-05T08:23:06.4053965Z HEAD is now at ad7811e Build Done
+2025-02-05T08:23:06.4099758Z M	testfile.txt
+2025-02-05T08:23:06.4140179Z [command]/usr/bin/git rev-parse --symbolic-full-name --branches
+2025-02-05T08:23:06.4226429Z refs/heads/main
+2025-02-05T08:23:06.4268511Z [command]/usr/bin/git branch --delete --force main
+2025-02-05T08:23:06.4465731Z Deleted branch main (was ad7811e).
+2025-02-05T08:23:06.4498777Z [command]/usr/bin/git rev-parse --symbolic-full-name --remotes=origin
+2025-02-05T08:23:06.4684474Z refs/remotes/origin/main
+2025-02-05T08:23:06.4701317Z ##[endgroup]
+2025-02-05T08:23:06.4702724Z ##[group]Cleaning the repository
+2025-02-05T08:23:06.4706506Z [command]/usr/bin/git clean -ffdx
+2025-02-05T08:23:06.5583923Z Removing build/
+2025-02-05T08:23:06.5584420Z [command]/usr/bin/git reset --hard HEAD
+2025-02-05T08:23:06.6364275Z HEAD is now at ad7811e Build Done
+2025-02-05T08:23:06.6404857Z ##[endgroup]
+2025-02-05T08:23:06.6416531Z ##[group]Disabling automatic garbage collection
+2025-02-05T08:23:06.6422690Z [command]/usr/bin/git config --local gc.auto 0
+2025-02-05T08:23:06.6543216Z ##[endgroup]
+2025-02-05T08:23:06.6543676Z ##[group]Setting up auth
+2025-02-05T08:23:06.6557265Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2025-02-05T08:23:06.6660863Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2025-02-05T08:23:06.7818652Z Entering 'assignment-autotest'
+2025-02-05T08:23:06.7977170Z Entering 'assignment-autotest/Unity'
+2025-02-05T08:23:06.8275048Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2025-02-05T08:23:06.8366285Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2025-02-05T08:23:06.9635531Z Entering 'assignment-autotest'
+2025-02-05T08:23:06.9836933Z Entering 'assignment-autotest/Unity'
+2025-02-05T08:23:07.0307302Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2025-02-05T08:23:07.0497133Z ##[endgroup]
+2025-02-05T08:23:07.0497767Z ##[group]Fetching the repository
+2025-02-05T08:23:07.0532962Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --progress --no-recurse-submodules --depth=1 origin +ad7811e7c25f0e0b280c6ecd40e5a6df868f083b:refs/remotes/origin/main
+2025-02-05T08:23:07.6242701Z remote: Total 0 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)        
+2025-02-05T08:23:07.6617905Z ##[endgroup]
+2025-02-05T08:23:07.6658395Z ##[group]Determining the checkout info
+2025-02-05T08:23:07.6666314Z ##[endgroup]
+2025-02-05T08:23:07.6666899Z ##[group]Checking out the ref
+2025-02-05T08:23:07.6667501Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+2025-02-05T08:23:07.7056401Z Switched to a new branch 'main'
+2025-02-05T08:23:07.7057490Z Branch 'main' set up to track remote branch 'main' from 'origin'.
+2025-02-05T08:23:07.7067593Z ##[endgroup]
+2025-02-05T08:23:07.7216489Z [command]/usr/bin/git log -1 --format='%H'
+2025-02-05T08:23:07.7298214Z 'ad7811e7c25f0e0b280c6ecd40e5a6df868f083b'
+2025-02-05T08:23:07.7975030Z ##[group]Run git submodule update --init --recursive
+2025-02-05T08:23:07.7975530Z [36;1mgit submodule update --init --recursive[0m
+2025-02-05T08:23:07.7983854Z shell: sh -e {0}
+2025-02-05T08:23:07.7984106Z ##[endgroup]
+2025-02-05T08:23:08.3167854Z ##[group]Run ./full-test.sh
+2025-02-05T08:23:08.3168601Z [36;1m./full-test.sh[0m
+2025-02-05T08:23:08.3169364Z shell: sh -e {0}
+2025-02-05T08:23:08.3173277Z ##[endgroup]
+2025-02-05T08:23:08.5506341Z starting test with SKIP_BUILD="" and DO_VALIDATE=""
+2025-02-05T08:23:08.5687681Z Running test with user root
+2025-02-05T08:23:08.7706898Z -- The C compiler identification is GNU 11.4.0
+2025-02-05T08:23:08.9348244Z -- The CXX compiler identification is GNU 11.4.0
+2025-02-05T08:23:08.9562897Z -- Detecting C compiler ABI info
+2025-02-05T08:23:09.2334595Z -- Detecting C compiler ABI info - done
+2025-02-05T08:23:09.2523980Z -- Check for working C compiler: /usr/bin/cc - skipped
+2025-02-05T08:23:09.2525246Z -- Detecting C compile features
+2025-02-05T08:23:09.2554248Z -- Detecting C compile features - done
+2025-02-05T08:23:09.2623123Z -- Detecting CXX compiler ABI info
+2025-02-05T08:23:09.5292650Z -- Detecting CXX compiler ABI info - done
+2025-02-05T08:23:09.5467461Z -- Check for working CXX compiler: /usr/bin/c++ - skipped
+2025-02-05T08:23:09.5489192Z -- Detecting CXX compile features
+2025-02-05T08:23:09.5522319Z -- Detecting CXX compile features - done
+2025-02-05T08:23:09.5658830Z -- Generating ;/__w/assignments-3-and-later-HardikMinochaESE/assignments-3-and-later-HardikMinochaESE/assignment-autotest/test/assignment1/Test_hello_Runner.c;/__w/assignments-3-and-later-HardikMinochaESE/assignments-3-and-later-HardikMinochaESE/assignment-autotest/test/assignment1/Test_assignment_validate_Runner.c;/__w/assignments-3-and-later-HardikMinochaESE/assignments-3-and-later-HardikMinochaESE/assignment-autotest/test/assignment3/Test_systemcalls_Runner.c from test/assignment1/Test_hello.c;test/assignment1/Test_assignment_validate.c;test/assignment3/Test_systemcalls.c
+2025-02-05T08:23:09.5685472Z -- Building executable including ;/__w/assignments-3-and-later-HardikMinochaESE/assignments-3-and-later-HardikMinochaESE/assignment-autotest/test/assignment1/Test_hello_Runner.c;/__w/assignments-3-and-later-HardikMinochaESE/assignments-3-and-later-HardikMinochaESE/assignment-autotest/test/assignment1/Test_assignment_validate_Runner.c;/__w/assignments-3-and-later-HardikMinochaESE/assignments-3-and-later-HardikMinochaESE/assignment-autotest/test/assignment3/Test_systemcalls_Runner.c test/assignment1/Test_hello.c;test/assignment1/Test_assignment_validate.c;test/assignment3/Test_systemcalls.c and ../examples/autotest-validate/autotest-validate.c;../examples/systemcalls/systemcalls.c
+2025-02-05T08:23:09.5690706Z -- Configuring done
+2025-02-05T08:23:09.5986665Z -- Generating done
+2025-02-05T08:23:09.6045636Z -- Build files have been written to: /__w/assignments-3-and-later-HardikMinochaESE/assignments-3-and-later-HardikMinochaESE/build
+2025-02-05T08:23:09.8852486Z [  7%] Building C object assignment-autotest/Unity/src/CMakeFiles/unity.dir/unity.c.o
+2025-02-05T08:23:10.0986226Z [ 15%] Linking C static library libunity.a
+2025-02-05T08:23:10.2090443Z [ 15%] Built target unity
+2025-02-05T08:23:10.2476322Z [ 23%] Generating ../../assignment-autotest/test/assignment1/Test_hello_Runner.c, ../../assignment-autotest/test/assignment1/Test_assignment_validate_Runner.c, ../../assignment-autotest/test/assignment3/Test_systemcalls_Runner.c, ../../assignment-autotest/test/unity_runner.c
+2025-02-05T08:23:10.2665330Z Test files for auto dependency generation test/assignment1/Test_hello.c test/assignment1/Test_assignment_validate.c test/assignment3/Test_systemcalls.c
+2025-02-05T08:23:10.2782142Z Autogenerating runner for test/assignment1/Test_hello.c
+2025-02-05T08:23:10.4946381Z Autogenerating runner for test/assignment1/Test_assignment_validate.c
+2025-02-05T08:23:10.6936640Z Autogenerating runner for test/assignment3/Test_systemcalls.c
+2025-02-05T08:23:10.8932864Z Autogenerating test/unity_runner.c
+2025-02-05T08:23:10.9809566Z [ 30%] Building C object assignment-autotest/CMakeFiles/assignment-autotest.dir/test/assignment1/Test_hello.c.o
+2025-02-05T08:23:11.0773613Z [ 38%] Building C object assignment-autotest/CMakeFiles/assignment-autotest.dir/test/assignment1/Test_assignment_validate.c.o
+2025-02-05T08:23:11.1785798Z [ 46%] Building C object assignment-autotest/CMakeFiles/assignment-autotest.dir/test/assignment3/Test_systemcalls.c.o
+2025-02-05T08:23:11.2951558Z [ 53%] Building C object assignment-autotest/CMakeFiles/assignment-autotest.dir/test/assignment1/Test_hello_Runner.c.o
+2025-02-05T08:23:11.3955128Z [ 61%] Building C object assignment-autotest/CMakeFiles/assignment-autotest.dir/test/assignment1/Test_assignment_validate_Runner.c.o
+2025-02-05T08:23:11.5187338Z [ 69%] Building C object assignment-autotest/CMakeFiles/assignment-autotest.dir/test/assignment3/Test_systemcalls_Runner.c.o
+2025-02-05T08:23:11.6304039Z [ 76%] Building C object assignment-autotest/CMakeFiles/assignment-autotest.dir/__/examples/autotest-validate/autotest-validate.c.o
+2025-02-05T08:23:11.7107200Z [ 84%] Building C object assignment-autotest/CMakeFiles/assignment-autotest.dir/__/examples/systemcalls/systemcalls.c.o
+2025-02-05T08:23:11.8453271Z [ 92%] Building C object assignment-autotest/CMakeFiles/assignment-autotest.dir/test/unity_runner.c.o
+2025-02-05T08:23:11.9684539Z [100%] Linking C executable assignment-autotest
+2025-02-05T08:23:12.2794088Z [100%] Built target assignment-autotest
+2025-02-05T08:23:12.4041731Z Unit test failed
+2025-02-05T08:23:12.4240504Z Executing assignment test script
+2025-02-05T08:23:12.4384303Z /__w/assignments-3-and-later-HardikMinochaESE/assignments-3-and-later-HardikMinochaESE/assignment-autotest/test/assignment3 /__w/assignments-3-and-later-HardikMinochaESE/assignments-3-and-later-HardikMinochaESE
+2025-02-05T08:23:12.4453975Z starting test with SKIP_BUILD  and DO_VALIDATE 
+2025-02-05T08:23:12.4463098Z /__w/assignments-3-and-later-HardikMinochaESE/assignments-3-and-later-HardikMinochaESE/finder-app /__w/assignments-3-and-later-HardikMinochaESE/assignments-3-and-later-HardikMinochaESE/assignment-autotest/test/assignment3 /__w/assignments-3-and-later-HardikMinochaESE/assignments-3-and-later-HardikMinochaESE
+2025-02-05T08:23:12.5456441Z Using passed directory /tmp/aesd-autograder for output
+2025-02-05T08:23:12.5594505Z CLONING GIT LINUX STABLE VERSION v5.15.163 IN /tmp/aesd-autograder
+2025-02-05T08:23:12.5908977Z Cloning into 'linux-stable'...
+2025-02-05T08:25:17.9921742Z Note: switching to '7c6d66f0266faf94d04b3bfe0d7a06eae3484c50'.
+2025-02-05T08:25:17.9930461Z 
+2025-02-05T08:25:17.9930806Z You are in 'detached HEAD' state. You can look around, make experimental
+2025-02-05T08:25:17.9931384Z changes and commit them, and you can discard any commits you make in this
+2025-02-05T08:25:17.9931895Z state without impacting any branches by switching back to a branch.
+2025-02-05T08:25:17.9932189Z 
+2025-02-05T08:25:17.9932727Z If you want to create a new branch to retain commits you create, you may
+2025-02-05T08:25:17.9933212Z do so (now or later) by using -c with the switch command. Example:
+2025-02-05T08:25:17.9933492Z 
+2025-02-05T08:25:17.9933645Z   git switch -c <new-branch-name>
+2025-02-05T08:25:17.9933834Z 
+2025-02-05T08:25:17.9933963Z Or undo this operation with:
+2025-02-05T08:25:17.9934143Z 
+2025-02-05T08:25:17.9934229Z   git switch -
+2025-02-05T08:25:17.9934371Z 
+2025-02-05T08:25:17.9934598Z Turn off this advice by setting config variable advice.detachedHead to false
+2025-02-05T08:25:17.9934934Z 
+2025-02-05T08:25:19.1684186Z Updating files:   7% (5650/73683)
+2025-02-05T08:25:19.3961292Z Updating files:   8% (5895/73683)
+2025-02-05T08:25:19.6162243Z Updating files:   9% (6632/73683)
+2025-02-05T08:25:19.7974589Z Updating files:  10% (7369/73683)
+2025-02-05T08:25:20.0080296Z Updating files:  11% (8106/73683)
+2025-02-05T08:25:20.0996126Z Updating files:  12% (8842/73683)
+2025-02-05T08:25:20.1837227Z Updating files:  12% (9164/73683)
+2025-02-05T08:25:20.3796713Z Updating files:  13% (9579/73683)
+2025-02-05T08:25:20.5746063Z Updating files:  14% (10316/73683)
+2025-02-05T08:25:20.7438535Z Updating files:  15% (11053/73683)
+2025-02-05T08:25:20.9493718Z Updating files:  16% (11790/73683)
+2025-02-05T08:25:21.0981290Z Updating files:  17% (12527/73683)
+2025-02-05T08:25:21.1472648Z Updating files:  17% (13086/73683)
+2025-02-05T08:25:21.3445755Z Updating files:  18% (13263/73683)
+2025-02-05T08:25:21.5312081Z Updating files:  19% (14000/73683)
+2025-02-05T08:25:21.7323654Z Updating files:  20% (14737/73683)
+2025-02-05T08:25:21.9447855Z Updating files:  21% (15474/73683)
+2025-02-05T08:25:22.0993339Z Updating files:  22% (16211/73683)
+2025-02-05T08:25:22.1313903Z Updating files:  22% (16844/73683)
+2025-02-05T08:25:22.2807899Z Updating files:  23% (16948/73683)
+2025-02-05T08:25:22.4066761Z Updating files:  24% (17684/73683)
+2025-02-05T08:25:22.5338629Z Updating files:  25% (18421/73683)
+2025-02-05T08:25:22.7253265Z Updating files:  26% (19158/73683)
+2025-02-05T08:25:22.9337892Z Updating files:  27% (19895/73683)
+2025-02-05T08:25:23.0943235Z Updating files:  28% (20632/73683)
+2025-02-05T08:25:23.0976307Z Updating files:  29% (21369/73683)
+2025-02-05T08:25:23.2474630Z Updating files:  29% (21390/73683)
+2025-02-05T08:25:23.4597716Z Updating files:  30% (22105/73683)
+2025-02-05T08:25:23.7205992Z Updating files:  31% (22842/73683)
+2025-02-05T08:25:24.0347359Z Updating files:  32% (23579/73683)
+2025-02-05T08:25:24.0986710Z Updating files:  33% (24316/73683)
+2025-02-05T08:25:24.2228057Z Updating files:  33% (24568/73683)
+2025-02-05T08:25:24.4206718Z Updating files:  34% (25053/73683)
+2025-02-05T08:25:24.5802602Z Updating files:  35% (25790/73683)
+2025-02-05T08:25:24.7632311Z Updating files:  36% (26526/73683)
+2025-02-05T08:25:24.9618367Z Updating files:  37% (27263/73683)
+2025-02-05T08:25:25.0984274Z Updating files:  38% (28000/73683)
+2025-02-05T08:25:25.1804676Z Updating files:  38% (28519/73683)
+2025-02-05T08:25:25.6463519Z Updating files:  39% (28737/73683)
+2025-02-05T08:25:26.1076111Z Updating files:  40% (29474/73683)
+2025-02-05T08:25:27.1555927Z Updating files:  40% (29650/73683)
+2025-02-05T08:25:27.3555114Z Updating files:  40% (29766/73683)
+2025-02-05T08:25:27.5232758Z Updating files:  41% (30211/73683)
+2025-02-05T08:25:27.7349625Z Updating files:  42% (30947/73683)
+2025-02-05T08:25:27.9640107Z Updating files:  43% (31684/73683)
+2025-02-05T08:25:28.0984069Z Updating files:  44% (32421/73683)
+2025-02-05T08:25:28.1645854Z Updating files:  44% (32909/73683)
+2025-02-05T08:25:28.3302551Z Updating files:  45% (33158/73683)
+2025-02-05T08:25:28.5083163Z Updating files:  46% (33895/73683)
+2025-02-05T08:25:28.6570151Z Updating files:  47% (34632/73683)
+2025-02-05T08:25:28.8424515Z Updating files:  48% (35368/73683)
+2025-02-05T08:25:29.0263096Z Updating files:  49% (36105/73683)
+2025-02-05T08:25:29.1023765Z Updating files:  50% (36842/73683)
+2025-02-05T08:25:29.2824962Z Updating files:  50% (37091/73683)
+2025-02-05T08:25:29.5324387Z Updating files:  51% (37579/73683)
+2025-02-05T08:25:29.6690097Z Updating files:  52% (38316/73683)
+2025-02-05T08:25:29.8387216Z Updating files:  53% (39052/73683)
+2025-02-05T08:25:30.1011236Z Updating files:  54% (39789/73683)
+2025-02-05T08:25:30.1168468Z Updating files:  54% (40489/73683)
+2025-02-05T08:25:30.3407004Z Updating files:  55% (40526/73683)
+2025-02-05T08:25:30.9481698Z Updating files:  56% (41263/73683)
+2025-02-05T08:25:31.1040467Z Updating files:  57% (42000/73683)
+2025-02-05T08:25:31.8150964Z Updating files:  57% (42134/73683)
+2025-02-05T08:25:32.0996892Z Updating files:  58% (42737/73683)
+2025-02-05T08:25:32.1174397Z Updating files:  58% (43399/73683)
+2025-02-05T08:25:32.2781756Z Updating files:  59% (43473/73683)
+2025-02-05T08:25:32.4582040Z Updating files:  60% (44210/73683)
+2025-02-05T08:25:32.6291937Z Updating files:  61% (44947/73683)
+2025-02-05T08:25:32.7843301Z Updating files:  62% (45684/73683)
+2025-02-05T08:25:32.9424097Z Updating files:  63% (46421/73683)
+2025-02-05T08:25:33.0993587Z Updating files:  64% (47158/73683)
+2025-02-05T08:25:33.1084511Z Updating files:  64% (47850/73683)
+2025-02-05T08:25:33.2469635Z Updating files:  65% (47894/73683)
+2025-02-05T08:25:33.5306272Z Updating files:  66% (48631/73683)
+2025-02-05T08:25:33.6921860Z Updating files:  67% (49368/73683)
+2025-02-05T08:25:33.8076706Z Updating files:  68% (50105/73683)
+2025-02-05T08:25:33.9551721Z Updating files:  69% (50842/73683)
+2025-02-05T08:25:34.0845628Z Updating files:  70% (51579/73683)
+2025-02-05T08:25:34.0986808Z Updating files:  71% (52315/73683)
+2025-02-05T08:25:34.2599614Z Updating files:  71% (52390/73683)
+2025-02-05T08:25:34.4224415Z Updating files:  72% (53052/73683)
+2025-02-05T08:25:34.5888618Z Updating files:  73% (53789/73683)
+2025-02-05T08:25:34.8218237Z Updating files:  74% (54526/73683)
+2025-02-05T08:25:35.0341831Z Updating files:  75% (55263/73683)
+2025-02-05T08:25:35.0985553Z Updating files:  76% (56000/73683)
+2025-02-05T08:25:35.2055065Z Updating files:  76% (56256/73683)
+2025-02-05T08:25:35.3371200Z Updating files:  77% (56736/73683)
+2025-02-05T08:25:35.4697877Z Updating files:  78% (57473/73683)
+2025-02-05T08:25:35.6341217Z Updating files:  79% (58210/73683)
+2025-02-05T08:25:35.8514201Z Updating files:  80% (58947/73683)
+2025-02-05T08:25:35.9964862Z Updating files:  81% (59684/73683)
+2025-02-05T08:25:36.1005695Z Updating files:  82% (60421/73683)
+2025-02-05T08:25:36.1404493Z Updating files:  82% (60953/73683)
+2025-02-05T08:25:36.2746825Z Updating files:  83% (61157/73683)
+2025-02-05T08:25:36.4642550Z Updating files:  84% (61894/73683)
+2025-02-05T08:25:36.7066802Z Updating files:  85% (62631/73683)
+2025-02-05T08:25:36.9286798Z Updating files:  86% (63368/73683)
+2025-02-05T08:25:37.0986655Z Updating files:  87% (64105/73683)
+2025-02-05T08:25:37.1160584Z Updating files:  87% (64783/73683)
+2025-02-05T08:25:37.3122322Z Updating files:  88% (64842/73683)
+2025-02-05T08:25:37.4982181Z Updating files:  89% (65578/73683)
+2025-02-05T08:25:37.7461801Z Updating files:  90% (66315/73683)
+2025-02-05T08:25:38.0342793Z Updating files:  91% (67052/73683)
+2025-02-05T08:25:38.0995265Z Updating files:  92% (67789/73683)
+2025-02-05T08:25:38.2117459Z Updating files:  92% (68099/73683)
+2025-02-05T08:25:38.3443643Z Updating files:  93% (68526/73683)
+2025-02-05T08:25:38.5453591Z Updating files:  94% (69263/73683)
+2025-02-05T08:25:38.7713975Z Updating files:  95% (69999/73683)
+2025-02-05T08:25:38.8963168Z Updating files:  96% (70736/73683)
+2025-02-05T08:25:39.0775003Z Updating files:  97% (71473/73683)
+2025-02-05T08:25:39.0987460Z Updating files:  98% (72210/73683)
+2025-02-05T08:25:39.1993743Z Updating files:  98% (72329/73683)
+2025-02-05T08:25:39.3200814Z Updating files:  99% (72947/73683)
+2025-02-05T08:25:39.3202217Z Updating files: 100% (73683/73683)
+2025-02-05T08:25:39.3205160Z Updating files: 100% (73683/73683), done.
+2025-02-05T08:25:39.5154085Z Checking out version v5.15.163
+2025-02-05T08:25:39.9313448Z HEAD is now at 7c6d66f02 Linux 5.15.163
+2025-02-05T08:25:53.7463699Z   HOSTCC  scripts/basic/fixdep
+2025-02-05T08:25:54.2235982Z   HOSTCC  scripts/kconfig/conf.o
+2025-02-05T08:25:54.7983912Z   HOSTCC  scripts/kconfig/confdata.o
+2025-02-05T08:25:55.2960916Z   HOSTCC  scripts/kconfig/expr.o
+2025-02-05T08:25:55.7295059Z   LEX     scripts/kconfig/lexer.lex.c
+2025-02-05T08:25:55.7517633Z   YACC    scripts/kconfig/parser.tab.[ch]
+2025-02-05T08:25:55.9063463Z   HOSTCC  scripts/kconfig/lexer.lex.o
+2025-02-05T08:25:56.4911800Z   HOSTCC  scripts/kconfig/menu.o
+2025-02-05T08:25:56.9474468Z   HOSTCC  scripts/kconfig/parser.tab.o
+2025-02-05T08:25:57.4976413Z   HOSTCC  scripts/kconfig/preprocess.o
+2025-02-05T08:25:57.7786149Z   HOSTCC  scripts/kconfig/symbol.o
+2025-02-05T08:25:58.3736335Z   HOSTCC  scripts/kconfig/util.o
+2025-02-05T08:25:58.5182668Z   HOSTLD  scripts/kconfig/conf
+2025-02-05T08:25:58.5842453Z *** Default configuration is based on 'defconfig'
+2025-02-05T08:26:02.7671622Z #
+2025-02-05T08:26:02.7672032Z # configuration written to .config
+2025-02-05T08:26:02.7672294Z #
+2025-02-05T08:26:04.3524996Z   HOSTCC  scripts/dtc/dtc.o
+2025-02-05T08:26:04.5337067Z   HOSTCC  scripts/dtc/flattree.o
+2025-02-05T08:26:04.8706924Z   HOSTCC  scripts/dtc/fstree.o
+2025-02-05T08:26:04.9982990Z   HOSTCC  scripts/dtc/data.o
+2025-02-05T08:26:05.3275973Z   HOSTCC  scripts/dtc/livetree.o
+2025-02-05T08:26:06.2348761Z   HOSTCC  scripts/dtc/treesource.o
+2025-02-05T08:26:06.6250966Z   HOSTCC  scripts/dtc/srcpos.o
+2025-02-05T08:26:06.9673333Z   HOSTCC  scripts/dtc/checks.o
+2025-02-05T08:26:08.3487865Z   HOSTCC  scripts/dtc/util.o
+2025-02-05T08:26:09.0237744Z   LEX     scripts/dtc/dtc-lexer.lex.c
+2025-02-05T08:26:09.1061255Z   YACC    scripts/dtc/dtc-parser.tab.[ch]
+2025-02-05T08:26:09.5905440Z   HOSTCC  scripts/dtc/dtc-lexer.lex.o
+2025-02-05T08:26:10.5838105Z   HOSTCC  scripts/dtc/dtc-parser.tab.o
+2025-02-05T08:26:11.5185391Z   HOSTLD  scripts/dtc/dtc
+2025-02-05T08:26:11.6125231Z   HOSTCC  scripts/dtc/libfdt/fdt.o
+2025-02-05T08:26:11.8645479Z   HOSTCC  scripts/dtc/libfdt/fdt_ro.o
+2025-02-05T08:26:12.8917713Z   HOSTCC  scripts/dtc/libfdt/fdt_wip.o
+2025-02-05T08:26:13.2088179Z   HOSTCC  scripts/dtc/libfdt/fdt_sw.o
+2025-02-05T08:26:13.7384868Z   HOSTCC  scripts/dtc/libfdt/fdt_rw.o
+2025-02-05T08:26:14.1226769Z   HOSTCC  scripts/dtc/libfdt/fdt_strerror.o
+2025-02-05T08:26:14.3407819Z   HOSTCC  scripts/dtc/libfdt/fdt_empty_tree.o
+2025-02-05T08:26:14.4143028Z   HOSTCC  scripts/dtc/libfdt/fdt_addresses.o
+2025-02-05T08:26:14.5868454Z   HOSTCC  scripts/dtc/libfdt/fdt_overlay.o
+2025-02-05T08:26:15.1421022Z   HOSTCC  scripts/dtc/fdtoverlay.o
+2025-02-05T08:26:15.4473926Z   HOSTLD  scripts/dtc/fdtoverlay
+2025-02-05T08:26:15.6105052Z   HOSTCC  scripts/kallsyms
+2025-02-05T08:26:16.3863201Z   HOSTCC  scripts/sorttable
+2025-02-05T08:26:17.2653583Z   HOSTCC  scripts/asn1_compiler
+2025-02-05T08:26:18.3111165Z   HOSTCC  scripts/extract-cert
+2025-02-05T08:26:18.8884387Z   WRAP    arch/arm64/include/generated/uapi/asm/kvm_para.h
+2025-02-05T08:26:18.8928776Z   WRAP    arch/arm64/include/generated/uapi/asm/errno.h
+2025-02-05T08:26:18.8968667Z   WRAP    arch/arm64/include/generated/uapi/asm/ioctl.h
+2025-02-05T08:26:18.9022468Z   WRAP    arch/arm64/include/generated/uapi/asm/ioctls.h
+2025-02-05T08:26:18.9077199Z   WRAP    arch/arm64/include/generated/uapi/asm/ipcbuf.h
+2025-02-05T08:26:18.9139491Z   WRAP    arch/arm64/include/generated/uapi/asm/msgbuf.h
+2025-02-05T08:26:18.9192567Z   WRAP    arch/arm64/include/generated/uapi/asm/poll.h
+2025-02-05T08:26:18.9270737Z   WRAP    arch/arm64/include/generated/uapi/asm/resource.h
+2025-02-05T08:26:18.9337161Z   WRAP    arch/arm64/include/generated/uapi/asm/sembuf.h
+2025-02-05T08:26:18.9397507Z   WRAP    arch/arm64/include/generated/uapi/asm/shmbuf.h
+2025-02-05T08:26:18.9446916Z   WRAP    arch/arm64/include/generated/uapi/asm/siginfo.h
+2025-02-05T08:26:18.9508691Z   WRAP    arch/arm64/include/generated/uapi/asm/socket.h
+2025-02-05T08:26:18.9587873Z   WRAP    arch/arm64/include/generated/uapi/asm/sockios.h
+2025-02-05T08:26:18.9683121Z   WRAP    arch/arm64/include/generated/uapi/asm/stat.h
+2025-02-05T08:26:19.0074924Z   WRAP    arch/arm64/include/generated/uapi/asm/swab.h
+2025-02-05T08:26:19.0498449Z   WRAP    arch/arm64/include/generated/uapi/asm/termbits.h
+2025-02-05T08:26:19.0896656Z   WRAP    arch/arm64/include/generated/uapi/asm/termios.h
+2025-02-05T08:26:19.1006121Z   WRAP    arch/arm64/include/generated/uapi/asm/types.h
+2025-02-05T08:26:19.1914266Z   WRAP    arch/arm64/include/generated/asm/early_ioremap.h
+2025-02-05T08:26:19.1963015Z   WRAP    arch/arm64/include/generated/asm/mcs_spinlock.h
+2025-02-05T08:26:19.2046842Z   WRAP    arch/arm64/include/generated/asm/qrwlock.h
+2025-02-05T08:26:19.2082291Z   WRAP    arch/arm64/include/generated/asm/qspinlock.h
+2025-02-05T08:26:19.2147107Z   WRAP    arch/arm64/include/generated/asm/user.h
+2025-02-05T08:26:19.2188756Z   WRAP    arch/arm64/include/generated/asm/bugs.h
+2025-02-05T08:26:19.2240836Z   WRAP    arch/arm64/include/generated/asm/delay.h
+2025-02-05T08:26:19.2294884Z   WRAP    arch/arm64/include/generated/asm/div64.h
+2025-02-05T08:26:19.2366877Z   WRAP    arch/arm64/include/generated/asm/dma-mapping.h
+2025-02-05T08:26:19.2400793Z   WRAP    arch/arm64/include/generated/asm/dma.h
+2025-02-05T08:26:19.2467011Z   WRAP    arch/arm64/include/generated/asm/emergency-restart.h
+2025-02-05T08:26:19.2505821Z   WRAP    arch/arm64/include/generated/asm/hw_irq.h
+2025-02-05T08:26:19.2572793Z   WRAP    arch/arm64/include/generated/asm/irq_regs.h
+2025-02-05T08:26:19.2611273Z   WRAP    arch/arm64/include/generated/asm/kdebug.h
+2025-02-05T08:26:19.2681913Z   WRAP    arch/arm64/include/generated/asm/kmap_size.h
+2025-02-05T08:26:19.2727263Z   WRAP    arch/arm64/include/generated/asm/local.h
+2025-02-05T08:26:19.2782093Z   WRAP    arch/arm64/include/generated/asm/local64.h
+2025-02-05T08:26:19.2883662Z   WRAP    arch/arm64/include/generated/asm/mmiowb.h
+2025-02-05T08:26:19.2941583Z   WRAP    arch/arm64/include/generated/asm/msi.h
+2025-02-05T08:26:19.3004946Z   WRAP    arch/arm64/include/generated/asm/serial.h
+2025-02-05T08:26:19.3055695Z   WRAP    arch/arm64/include/generated/asm/softirq_stack.h
+2025-02-05T08:26:19.3103298Z   WRAP    arch/arm64/include/generated/asm/switch_to.h
+2025-02-05T08:26:19.3156422Z   WRAP    arch/arm64/include/generated/asm/trace_clock.h
+2025-02-05T08:26:19.3204415Z   WRAP    arch/arm64/include/generated/asm/unaligned.h
+2025-02-05T08:26:19.3290140Z   WRAP    arch/arm64/include/generated/asm/vga.h
+2025-02-05T08:26:20.0475021Z   UPD     include/config/kernel.release
+2025-02-05T08:26:20.1597499Z   UPD     include/generated/uapi/linux/version.h
+2025-02-05T08:26:20.2522967Z   UPD     include/generated/utsrelease.h
+2025-02-05T08:26:20.4572587Z   GEN     arch/arm64/include/generated/asm/cpucaps.h
+2025-02-05T08:26:20.6147454Z   CC      scripts/mod/empty.o
+2025-02-05T08:26:20.7708609Z   HOSTCC  scripts/mod/mk_elfconfig
+2025-02-05T08:26:21.0716723Z   MKELF   scripts/mod/elfconfig.h
+2025-02-05T08:26:21.0865874Z   HOSTCC  scripts/mod/modpost.o
+2025-02-05T08:26:22.2977098Z   CC      scripts/mod/devicetable-offsets.s
+2025-02-05T08:26:22.5035483Z   UPD     scripts/mod/devicetable-offsets.h
+2025-02-05T08:26:22.5254444Z   HOSTCC  scripts/mod/file2alias.o
+2025-02-05T08:26:24.3241048Z   HOSTCC  scripts/mod/sumversion.o
+2025-02-05T08:26:24.8098087Z   HOSTLD  scripts/mod/modpost
+2025-02-05T08:26:25.0223463Z   CC      kernel/bounds.s
+2025-02-05T08:26:25.3575491Z   UPD     include/generated/bounds.h
+2025-02-05T08:26:25.3842911Z   UPD     include/generated/timeconst.h
+2025-02-05T08:26:25.3995665Z   CC      arch/arm64/kernel/asm-offsets.s
+2025-02-05T08:26:27.0793612Z   UPD     include/generated/asm-offsets.h
+2025-02-05T08:26:27.0963307Z   CALL    scripts/checksyscalls.sh
+2025-02-05T08:26:27.2252942Z   CALL    scripts/atomic/check-atomics.sh
+2025-02-05T08:26:27.3809105Z   LDS     arch/arm64/kernel/vdso/vdso.lds
+2025-02-05T08:26:27.4444793Z   CC      arch/arm64/kernel/vdso/vgettimeofday.o
+2025-02-05T08:26:27.8187714Z   AS      arch/arm64/kernel/vdso/note.o
+2025-02-05T08:26:27.9273746Z   AS      arch/arm64/kernel/vdso/sigreturn.o
+2025-02-05T08:26:28.0837071Z   LD      arch/arm64/kernel/vdso/vdso.so.dbg
+2025-02-05T08:26:28.1125687Z   VDSOSYM include/generated/vdso-offsets.h
+2025-02-05T08:26:28.1344057Z   OBJCOPY arch/arm64/kernel/vdso/vdso.so
+2025-02-05T08:26:28.2079239Z   CC      init/main.o
+2025-02-05T08:26:31.1925252Z   CHK     include/generated/compile.h
+2025-02-05T08:26:31.4102785Z   UPD     include/generated/compile.h
+2025-02-05T08:26:31.4625409Z   CC      init/version.o
+2025-02-05T08:26:32.4851785Z   CC      init/do_mounts.o
+2025-02-05T08:26:34.1365016Z   CC      init/do_mounts_initrd.o
+2025-02-05T08:26:35.6145995Z   CC      init/initramfs.o
+2025-02-05T08:26:38.2293467Z   CC      init/calibrate.o
+2025-02-05T08:26:38.8334089Z   CC      init/init_task.o
+2025-02-05T08:26:40.4166139Z   AR      init/built-in.a
+2025-02-05T08:26:40.5453920Z   HOSTCC  usr/gen_init_cpio
+2025-02-05T08:26:41.0663888Z   GEN     usr/initramfs_data.cpio
+2025-02-05T08:26:41.1166359Z   SHIPPED usr/initramfs_inc_data
+2025-02-05T08:26:41.1263028Z   AS      usr/initramfs_data.o
+2025-02-05T08:26:41.2150419Z   AR      usr/built-in.a
+2025-02-05T08:26:41.3656152Z   AR      arch/arm64/kernel/probes/built-in.a
+2025-02-05T08:26:41.3955374Z   AS      arch/arm64/kernel/head.o
+2025-02-05T08:26:41.5087131Z   LDS     arch/arm64/kernel/vmlinux.lds
+2025-02-05T08:26:41.6070117Z   CC      arch/arm64/kernel/debug-monitors.o
+2025-02-05T08:26:43.0333448Z   AS      arch/arm64/kernel/entry.o
+2025-02-05T08:26:43.1554941Z   CC      arch/arm64/kernel/irq.o
+2025-02-05T08:26:44.0566113Z   CC      arch/arm64/kernel/fpsimd.o
+2025-02-05T08:26:46.6991732Z   CC      arch/arm64/kernel/entry-common.o
+2025-02-05T08:26:49.4182371Z   AS      arch/arm64/kernel/entry-fpsimd.o
+2025-02-05T08:26:49.5561580Z   CC      arch/arm64/kernel/process.o
+2025-02-05T08:26:51.2286071Z   CC      arch/arm64/kernel/ptrace.o
+2025-02-05T08:26:54.2885510Z   CC      arch/arm64/kernel/setup.o
+2025-02-05T08:26:55.7367714Z   CC      arch/arm64/kernel/signal.o
+2025-02-05T08:26:58.4291693Z   CC      arch/arm64/kernel/sys.o
+2025-02-05T08:26:59.6871418Z   CC      arch/arm64/kernel/stacktrace.o
+2025-02-05T08:27:00.8683049Z   CC      arch/arm64/kernel/time.o
+2025-02-05T08:27:02.1699889Z   CC      arch/arm64/kernel/traps.o
+2025-02-05T08:27:03.7441639Z   CC      arch/arm64/kernel/io.o
+2025-02-05T08:27:04.3256461Z   CC      arch/arm64/kernel/vdso.o
+2025-02-05T08:27:05.5652327Z   AS      arch/arm64/kernel/hyp-stub.o
+2025-02-05T08:27:05.6633172Z   CC      arch/arm64/kernel/psci.o
+2025-02-05T08:27:06.4904984Z   CC      arch/arm64/kernel/cpu_ops.o
+2025-02-05T08:27:08.6065272Z   CC      arch/arm64/kernel/return_address.o
+2025-02-05T08:27:09.7870247Z   CC      arch/arm64/kernel/cpuinfo.o
+2025-02-05T08:27:10.6924555Z   CC      arch/arm64/kernel/cpu_errata.o
+2025-02-05T08:27:11.9455826Z   CC      arch/arm64/kernel/cpufeature.o
+2025-02-05T08:27:15.9658222Z   CC      arch/arm64/kernel/alternative.o
+2025-02-05T08:27:17.2983705Z   CC      arch/arm64/kernel/cacheinfo.o
+2025-02-05T08:27:18.8035444Z   CC      arch/arm64/kernel/smp.o
+2025-02-05T08:27:20.6906492Z   CC      arch/arm64/kernel/smp_spin_table.o
+2025-02-05T08:27:21.8394761Z   CC      arch/arm64/kernel/topology.o
+2025-02-05T08:27:22.7213928Z   AS      arch/arm64/kernel/smccc-call.o
+2025-02-05T08:27:22.8234932Z   CC      arch/arm64/kernel/syscall.o
+2025-02-05T08:27:23.8006312Z   CC      arch/arm64/kernel/proton-pack.o
+2025-02-05T08:27:26.1906531Z   CC      arch/arm64/kernel/idreg-override.o
+2025-02-05T08:27:27.8441250Z   CC      arch/arm64/kernel/idle.o
+2025-02-05T08:27:29.5173465Z   CC      arch/arm64/kernel/patching.o
+2025-02-05T08:27:30.6811813Z   CC      arch/arm64/kernel/sys32.o
+2025-02-05T08:27:31.9261068Z   CC      arch/arm64/kernel/signal32.o
+2025-02-05T08:27:33.8283212Z   CC      arch/arm64/kernel/sys_compat.o
+2025-02-05T08:27:34.9588650Z   AS      arch/arm64/kernel/sigreturn32.o
+2025-02-05T08:27:35.0348004Z   AS      arch/arm64/kernel/kuser32.o
+2025-02-05T08:27:35.1101317Z   CC      arch/arm64/kernel/module.o
+2025-02-05T08:27:36.8694748Z   CC      arch/arm64/kernel/module-plts.o
+2025-02-05T08:27:39.0242567Z   CC      arch/arm64/kernel/perf_regs.o
+2025-02-05T08:27:40.7402919Z   CC      arch/arm64/kernel/perf_callchain.o
+2025-02-05T08:27:42.8318265Z   CC      arch/arm64/kernel/perf_event.o
+2025-02-05T08:27:45.3548948Z   CC      arch/arm64/kernel/hw_breakpoint.o
+2025-02-05T08:27:48.5942361Z   AS      arch/arm64/kernel/sleep.o
+2025-02-05T08:27:48.9030521Z   CC      arch/arm64/kernel/suspend.o
+2025-02-05T08:27:50.7572078Z   CC      arch/arm64/kernel/cpuidle.o
+2025-02-05T08:27:52.2454916Z   CC      arch/arm64/kernel/jump_label.o
+2025-02-05T08:27:52.5358339Z   CC      arch/arm64/kernel/efi.o
+2025-02-05T08:27:53.8435556Z   AS      arch/arm64/kernel/efi-entry.o
+2025-02-05T08:27:54.0000910Z   OBJCOPY arch/arm64/kernel/efi-entry.stub.o
+2025-02-05T08:27:54.0133760Z   AS      arch/arm64/kernel/efi-rt-wrapper.o
+2025-02-05T08:27:54.1386929Z   CC      arch/arm64/kernel/pci.o
+2025-02-05T08:27:55.5585373Z   CC      arch/arm64/kernel/acpi.o
+2025-02-05T08:27:57.6143894Z   CC      arch/arm64/kernel/acpi_numa.o
+2025-02-05T08:27:58.4939723Z   CC      arch/arm64/kernel/paravirt.o
+2025-02-05T08:27:59.4888678Z   CC      arch/arm64/kernel/kaslr.o
+2025-02-05T08:28:00.7444828Z   CC      arch/arm64/kernel/hibernate.o
+2025-02-05T08:28:03.0026071Z   AS      arch/arm64/kernel/hibernate-asm.o
+2025-02-05T08:28:03.1071927Z   CC      arch/arm64/kernel/machine_kexec.o
+2025-02-05T08:28:04.7937276Z   AS      arch/arm64/kernel/relocate_kernel.o
+2025-02-05T08:28:04.8674763Z   AS      arch/arm64/kernel/cpu-reset.o
+2025-02-05T08:28:05.0006561Z   CC      arch/arm64/kernel/machine_kexec_file.o
+2025-02-05T08:28:06.2793197Z   CC      arch/arm64/kernel/kexec_image.o
+2025-02-05T08:28:07.3989996Z   CC      arch/arm64/kernel/crash_dump.o
+2025-02-05T08:28:08.4704467Z   CC      arch/arm64/kernel/crash_core.o
+2025-02-05T08:28:09.5154626Z   CC      arch/arm64/kernel/pointer_auth.o
+2025-02-05T08:28:10.3944712Z   CC      arch/arm64/kernel/mte.o
+2025-02-05T08:28:12.0554238Z   AS      arch/arm64/kernel/vdso-wrap.o
+2025-02-05T08:28:12.1415914Z   AR      arch/arm64/kernel/built-in.a
+2025-02-05T08:28:12.2005319Z   CC      arch/arm64/mm/dma-mapping.o
+2025-02-05T08:28:13.3746943Z   CC      arch/arm64/mm/extable.o
+2025-02-05T08:28:14.3715320Z   CC      arch/arm64/mm/fault.o
+2025-02-05T08:28:16.8423763Z   CC      arch/arm64/mm/init.o
+2025-02-05T08:28:19.9045900Z   AS      arch/arm64/mm/cache.o
+2025-02-05T08:28:20.2178436Z   CC      arch/arm64/mm/copypage.o
+2025-02-05T08:28:21.6084283Z   CC      arch/arm64/mm/flush.o
+2025-02-05T08:28:23.4013936Z   CC      arch/arm64/mm/ioremap.o
+2025-02-05T08:28:24.0722067Z   CC      arch/arm64/mm/mmap.o
+2025-02-05T08:28:24.9916694Z   CC      arch/arm64/mm/pgd.o
+2025-02-05T08:28:26.1044987Z   CC      arch/arm64/mm/mmu.o
+2025-02-05T08:28:28.7768857Z   CC      arch/arm64/mm/context.o
+2025-02-05T08:28:30.5755946Z   AS      arch/arm64/mm/proc.o
+2025-02-05T08:28:30.6811545Z   CC      arch/arm64/mm/pageattr.o
+2025-02-05T08:28:31.7721803Z   CC      arch/arm64/mm/hugetlbpage.o
+2025-02-05T08:28:33.2516426Z   CC      arch/arm64/mm/trans_pgd.o
+2025-02-05T08:28:34.0696776Z   CC      arch/arm64/mm/mteswap.o
+2025-02-05T08:28:35.1147655Z   AR      arch/arm64/mm/built-in.a
+2025-02-05T08:28:35.1566023Z   CC      arch/arm64/net/bpf_jit_comp.o
+2025-02-05T08:28:38.4045956Z   AR      arch/arm64/net/built-in.a
+2025-02-05T08:28:38.6035596Z   CC      arch/arm64/kvm/hyp/vhe/timer-sr.o
+2025-02-05T08:28:40.1332781Z   CC      arch/arm64/kvm/hyp/vhe/sysreg-sr.o
+2025-02-05T08:28:41.3625039Z   CC      arch/arm64/kvm/hyp/vhe/debug-sr.o
+2025-02-05T08:28:42.9503454Z   CC      arch/arm64/kvm/hyp/vhe/switch.o
+2025-02-05T08:28:45.9536321Z   CC      arch/arm64/kvm/hyp/vhe/tlb.o
+2025-02-05T08:28:48.5185538Z   CC      arch/arm64/kvm/hyp/vhe/../vgic-v3-sr.o
+2025-02-05T08:28:51.6951640Z   CC      arch/arm64/kvm/hyp/vhe/../aarch32.o
+2025-02-05T08:28:53.7024810Z   CC      arch/arm64/kvm/hyp/vhe/../vgic-v2-cpuif-proxy.o
+2025-02-05T08:28:55.0986754Z   AS      arch/arm64/kvm/hyp/vhe/../entry.o
+2025-02-05T08:28:55.1992488Z   AS      arch/arm64/kvm/hyp/vhe/../fpsimd.o
+2025-02-05T08:28:55.3137519Z   AS      arch/arm64/kvm/hyp/vhe/../hyp-entry.o
+2025-02-05T08:28:55.4220351Z   CC      arch/arm64/kvm/hyp/vhe/../exception.o
+2025-02-05T08:28:56.8307379Z   AR      arch/arm64/kvm/hyp/vhe/built-in.a
+2025-02-05T08:28:56.9132939Z   CC      arch/arm64/kvm/hyp/nvhe/timer-sr.nvhe.o
+2025-02-05T08:28:58.0107658Z   CC      arch/arm64/kvm/hyp/nvhe/sysreg-sr.nvhe.o
+2025-02-05T08:28:59.2805270Z   CC      arch/arm64/kvm/hyp/nvhe/debug-sr.nvhe.o
+2025-02-05T08:29:00.9168887Z   CC      arch/arm64/kvm/hyp/nvhe/switch.nvhe.o
+2025-02-05T08:29:02.6775287Z   CC      arch/arm64/kvm/hyp/nvhe/tlb.nvhe.o
+2025-02-05T08:29:03.8491362Z   AS      arch/arm64/kvm/hyp/nvhe/hyp-init.nvhe.o
+2025-02-05T08:29:03.9509366Z   AS      arch/arm64/kvm/hyp/nvhe/host.nvhe.o
+2025-02-05T08:29:04.0560666Z   CC      arch/arm64/kvm/hyp/nvhe/hyp-main.nvhe.o
+2025-02-05T08:29:05.2588314Z   CC      arch/arm64/kvm/hyp/nvhe/hyp-smp.nvhe.o
+2025-02-05T08:29:06.6738204Z   CC      arch/arm64/kvm/hyp/nvhe/psci-relay.nvhe.o
+2025-02-05T08:29:07.9053263Z   CC      arch/arm64/kvm/hyp/nvhe/early_alloc.nvhe.o
+2025-02-05T08:29:09.3082368Z   CC      arch/arm64/kvm/hyp/nvhe/stub.nvhe.o
+2025-02-05T08:29:09.9436799Z   CC      arch/arm64/kvm/hyp/nvhe/page_alloc.nvhe.o
+2025-02-05T08:29:11.4721821Z   AS      arch/arm64/kvm/hyp/nvhe/cache.nvhe.o
+2025-02-05T08:29:11.5542240Z   CC      arch/arm64/kvm/hyp/nvhe/setup.nvhe.o
+2025-02-05T08:29:13.7445246Z   CC      arch/arm64/kvm/hyp/nvhe/mm.nvhe.o
+2025-02-05T08:29:15.9063676Z   CC      arch/arm64/kvm/hyp/nvhe/mem_protect.nvhe.o
+2025-02-05T08:29:17.7220123Z   CC      arch/arm64/kvm/hyp/nvhe/../vgic-v3-sr.nvhe.o
+2025-02-05T08:29:19.2464919Z   CC      arch/arm64/kvm/hyp/nvhe/../aarch32.nvhe.o
+2025-02-05T08:29:20.4137801Z   CC      arch/arm64/kvm/hyp/nvhe/../vgic-v2-cpuif-proxy.nvhe.o
+2025-02-05T08:29:21.6672920Z   AS      arch/arm64/kvm/hyp/nvhe/../entry.nvhe.o
+2025-02-05T08:29:21.8538239Z   AS      arch/arm64/kvm/hyp/nvhe/../fpsimd.nvhe.o
+2025-02-05T08:29:21.9576303Z   AS      arch/arm64/kvm/hyp/nvhe/../hyp-entry.nvhe.o
+2025-02-05T08:29:22.0813795Z   CC      arch/arm64/kvm/hyp/nvhe/../exception.nvhe.o
+2025-02-05T08:29:23.4617197Z   CC      arch/arm64/kvm/hyp/nvhe/../pgtable.nvhe.o
+2025-02-05T08:29:26.0553130Z   AS      arch/arm64/kvm/hyp/nvhe/../../../lib/clear_page.nvhe.o
+2025-02-05T08:29:26.1605268Z   AS      arch/arm64/kvm/hyp/nvhe/../../../lib/copy_page.nvhe.o
+2025-02-05T08:29:26.2842178Z   AS      arch/arm64/kvm/hyp/nvhe/../../../lib/memcpy.nvhe.o
+2025-02-05T08:29:26.3938527Z   AS      arch/arm64/kvm/hyp/nvhe/../../../lib/memset.nvhe.o
+2025-02-05T08:29:26.5246275Z   LDS     arch/arm64/kvm/hyp/nvhe/hyp.lds
+2025-02-05T08:29:26.6133777Z   LD      arch/arm64/kvm/hyp/nvhe/kvm_nvhe.tmp.o
+2025-02-05T08:29:26.6454714Z   HOSTCC  arch/arm64/kvm/hyp/nvhe/gen-hyprel
+2025-02-05T08:29:26.8855077Z   HYPREL  arch/arm64/kvm/hyp/nvhe/hyp-reloc.S
+2025-02-05T08:29:26.8980225Z   AS      arch/arm64/kvm/hyp/nvhe/hyp-reloc.o
+2025-02-05T08:29:26.9892408Z   LD      arch/arm64/kvm/hyp/nvhe/kvm_nvhe.rel.o
+2025-02-05T08:29:27.0035828Z   HYPCOPY arch/arm64/kvm/hyp/nvhe/kvm_nvhe.o
+2025-02-05T08:29:27.0205864Z   AR      arch/arm64/kvm/hyp/nvhe/built-in.a
+2025-02-05T08:29:27.0545108Z   CC      arch/arm64/kvm/hyp/pgtable.o
+2025-02-05T08:29:29.0407525Z   CC      arch/arm64/kvm/hyp/reserved_mem.o
+2025-02-05T08:29:31.2463585Z   AR      arch/arm64/kvm/hyp/built-in.a
+2025-02-05T08:29:31.2863979Z   CC      arch/arm64/kvm/../../../virt/kvm/kvm_main.o
+2025-02-05T08:29:37.0464374Z   CC      arch/arm64/kvm/../../../virt/kvm/coalesced_mmio.o
+2025-02-05T08:29:38.4332387Z   CC      arch/arm64/kvm/../../../virt/kvm/eventfd.o
+2025-02-05T08:29:40.4422220Z   CC      arch/arm64/kvm/../../../virt/kvm/vfio.o
+2025-02-05T08:29:42.6844205Z   CC      arch/arm64/kvm/../../../virt/kvm/irqchip.o
+2025-02-05T08:29:44.0181952Z   CC      arch/arm64/kvm/../../../virt/kvm/binary_stats.o
+2025-02-05T08:29:45.1781133Z   CC      arch/arm64/kvm/arm.o
+2025-02-05T08:29:49.5869591Z   CC      arch/arm64/kvm/mmu.o
+2025-02-05T08:29:52.9269449Z   CC      arch/arm64/kvm/mmio.o
+2025-02-05T08:29:54.6062655Z   CC      arch/arm64/kvm/psci.o
+2025-02-05T08:29:56.8103354Z   CC      arch/arm64/kvm/perf.o
+2025-02-05T08:29:57.9463389Z   CC      arch/arm64/kvm/hypercalls.o
+2025-02-05T08:29:59.1382028Z   CC      arch/arm64/kvm/pvtime.o
+2025-02-05T08:30:00.7334499Z   CC      arch/arm64/kvm/inject_fault.o
+2025-02-05T08:30:02.0754712Z   CC      arch/arm64/kvm/va_layout.o
+2025-02-05T08:30:03.2762328Z   CC      arch/arm64/kvm/handle_exit.o
+2025-02-05T08:30:04.5188485Z   CC      arch/arm64/kvm/guest.o
+2025-02-05T08:30:06.7687987Z   CC      arch/arm64/kvm/debug.o
+2025-02-05T08:30:08.3175450Z   CC      arch/arm64/kvm/reset.o
+2025-02-05T08:30:10.5100283Z   CC      arch/arm64/kvm/sys_regs.o
+2025-02-05T08:30:15.4117542Z   CC      arch/arm64/kvm/vgic-sys-reg-v3.o
+2025-02-05T08:30:17.4069352Z   CC      arch/arm64/kvm/fpsimd.o
+2025-02-05T08:30:18.9550728Z   CC      arch/arm64/kvm/pmu.o
+2025-02-05T08:30:20.2719473Z   CC      arch/arm64/kvm/arch_timer.o
+2025-02-05T08:30:22.6337882Z   CC      arch/arm64/kvm/trng.o
+2025-02-05T08:30:24.1269610Z   CC      arch/arm64/kvm/vgic/vgic.o
+2025-02-05T08:30:25.3373639Z   CC      arch/arm64/kvm/vgic/vgic-init.o
+2025-02-05T08:30:26.7667803Z   CC      arch/arm64/kvm/vgic/vgic-irqfd.o
+2025-02-05T08:30:27.9188569Z   CC      arch/arm64/kvm/vgic/vgic-v2.o
+2025-02-05T08:30:29.2245740Z   CC      arch/arm64/kvm/vgic/vgic-v3.o
+2025-02-05T08:30:30.9588349Z   CC      arch/arm64/kvm/vgic/vgic-v4.o
+2025-02-05T08:30:31.9967537Z   CC      arch/arm64/kvm/vgic/vgic-mmio.o
+2025-02-05T08:30:33.5137568Z   CC      arch/arm64/kvm/vgic/vgic-mmio-v2.o
+2025-02-05T08:30:34.6731199Z   CC      arch/arm64/kvm/vgic/vgic-mmio-v3.o
+2025-02-05T08:30:36.5397236Z   CC      arch/arm64/kvm/vgic/vgic-kvm-device.o
+2025-02-05T08:30:39.3485971Z   CC      arch/arm64/kvm/vgic/vgic-its.o
+2025-02-05T08:30:43.3008079Z   CC      arch/arm64/kvm/vgic/vgic-debug.o
+2025-02-05T08:30:44.9622515Z   CC      arch/arm64/kvm/pmu-emul.o
+2025-02-05T08:30:47.9581058Z   AR      arch/arm64/kvm/built-in.a
+2025-02-05T08:30:48.1423634Z   CC      arch/arm64/xen/../../arm/xen/enlighten.o
+2025-02-05T08:30:50.2297339Z   CC      arch/arm64/xen/../../arm/xen/grant-table.o
+2025-02-05T08:30:51.1786041Z   CC      arch/arm64/xen/../../arm/xen/p2m.o
+2025-02-05T08:30:53.4008453Z   CC      arch/arm64/xen/../../arm/xen/mm.o
+2025-02-05T08:30:54.9876928Z   AS      arch/arm64/xen/hypercall.o
+2025-02-05T08:30:55.1058550Z   AR      arch/arm64/xen/built-in.a
+2025-02-05T08:30:55.1712535Z   CC      arch/arm64/crypto/sha1-ce-glue.o
+2025-02-05T08:30:56.2596193Z   AS      arch/arm64/crypto/sha1-ce-core.o
+2025-02-05T08:30:56.3366941Z   CC      arch/arm64/crypto/sha2-ce-glue.o
+2025-02-05T08:30:58.0622492Z   AS      arch/arm64/crypto/sha2-ce-core.o
+2025-02-05T08:30:58.2045669Z   CC      arch/arm64/crypto/ghash-ce-glue.o
+2025-02-05T08:31:00.7576656Z   AS      arch/arm64/crypto/ghash-ce-core.o
+2025-02-05T08:31:00.9262014Z   AS      arch/arm64/crypto/aes-ce-core.o
+2025-02-05T08:31:01.0265098Z   CC      arch/arm64/crypto/aes-ce-glue.o
+2025-02-05T08:31:02.0031941Z   CC      arch/arm64/crypto/aes-ce-ccm-glue.o
+2025-02-05T08:31:03.5633773Z   AS      arch/arm64/crypto/aes-ce-ccm-core.o
+2025-02-05T08:31:03.6543026Z   CC      arch/arm64/crypto/aes-glue-ce.o
+2025-02-05T08:31:05.1989213Z   AS      arch/arm64/crypto/aes-ce.o
+2025-02-05T08:31:05.3338335Z   CC      arch/arm64/crypto/sha256-glue.o
+2025-02-05T08:31:07.1801865Z   PERLASM arch/arm64/crypto/sha256-core.S
+2025-02-05T08:31:07.3305722Z   AS      arch/arm64/crypto/sha256-core.o
+2025-02-05T08:31:07.4218031Z   AS      arch/arm64/crypto/aes-cipher-core.o
+2025-02-05T08:31:07.5046391Z   CC      arch/arm64/crypto/aes-cipher-glue.o
+2025-02-05T08:31:08.4299122Z   AR      arch/arm64/crypto/built-in.a
+2025-02-05T08:31:08.4582255Z   CC [M]  arch/arm64/crypto/sha512-ce-glue.o
+2025-02-05T08:31:09.5242636Z   AS [M]  arch/arm64/crypto/sha512-ce-core.o
+2025-02-05T08:31:09.6646255Z   LD [M]  arch/arm64/crypto/sha512-ce.o
+2025-02-05T08:31:09.6890685Z   CC [M]  arch/arm64/crypto/sha3-ce-glue.o
+2025-02-05T08:31:10.9742794Z   AS [M]  arch/arm64/crypto/sha3-ce-core.o
+2025-02-05T08:31:11.0952653Z   LD [M]  arch/arm64/crypto/sha3-ce.o
+2025-02-05T08:31:11.1286783Z   CC [M]  arch/arm64/crypto/sm3-ce-glue.o
+2025-02-05T08:31:11.9602026Z   AS [M]  arch/arm64/crypto/sm3-ce-core.o
+2025-02-05T08:31:12.0441937Z   LD [M]  arch/arm64/crypto/sm3-ce.o
+2025-02-05T08:31:12.0654614Z   AS [M]  arch/arm64/crypto/crct10dif-ce-core.o
+2025-02-05T08:31:12.1575117Z   CC [M]  arch/arm64/crypto/crct10dif-ce-glue.o
+2025-02-05T08:31:13.0721579Z   LD [M]  arch/arm64/crypto/crct10dif-ce.o
+2025-02-05T08:31:13.0964088Z   CC [M]  arch/arm64/crypto/aes-glue-neon.o
+2025-02-05T08:31:14.5832408Z   AS [M]  arch/arm64/crypto/aes-neon.o
+2025-02-05T08:31:14.7804217Z   LD [M]  arch/arm64/crypto/aes-neon-blk.o
+2025-02-05T08:31:14.8593122Z   CC [M]  arch/arm64/crypto/sha512-glue.o
+2025-02-05T08:31:16.4222054Z   PERLASM arch/arm64/crypto/sha512

@@ -85,10 +85,12 @@ bool do_exec(int count, ...)
         syslog(LOG_ERR, "Failed to fork process....\n");
 	return(false);
     }
-    // If fork() was successful, try execv() command.
-    else if(execv(command[0], command)){
-	    syslog(LOG_ERR, "Failed to execute system process\n");
-	    return(false); 
+    if(child_pid == 0){
+	    // If fork() was successful, try execv() command.
+	    else if(execv(command[0], command)){
+		    syslog(LOG_ERR, "Failed to execute system process\n");
+		    exit(1); 
+	    }
     }
     // if execv() doesn't return, wait for the child process to finish executing.
     else{
@@ -162,19 +164,22 @@ bool do_exec_redirect(const char *outputfile, int count, ...)
 	return(false);
     }
 
-    // Try to redirect the standard out to outputfile 
-    if (dup2(fd, 1) < 0){
-        syslog(LOG_ERR, "Could not redirect STDOUT to file...\n");
-        return(false);
+    if(child_pid == 0){
+		// Try to redirect the standard out to outputfile 
+	    if (dup2(fd, 1) < 0){
+		syslog(LOG_ERR, "Could not redirect STDOUT to file...\n");
+		return(false);
+	    }
+	    
+	    close(fd);
+	    
+	    // If fork() was successful, try execv() command.
+	    if(execv(command[0], command)){
+		    syslog(LOG_ERR, "Failed to execute system process\n");
+		    exit(1); 
+	    }
     }
-    
-    close(fd);
-    
-    // If fork() was successful, try execv() command.
-    if(execv(command[0], command)){
-	    syslog(LOG_ERR, "Failed to execute system process\n");
-	    return(false); 
-    }
+
     // if execv() doesn't return, wait for the child process to finish executing.
     else{
 
