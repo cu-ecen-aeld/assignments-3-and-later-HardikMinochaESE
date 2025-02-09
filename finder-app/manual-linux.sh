@@ -36,8 +36,8 @@ if [ ! -e ${OUTDIR}/linux-stable/arch/${ARCH}/boot/Image ]; then
     git checkout ${KERNEL_VERSION}
 
     # TODO: Add your kernel build steps here
-    make -j6 ARCH=${ARCH} CROSS_COMPILE=${CROSS_COMPILE} mrproper
-    make -j6 ARCH=${ARCH} CROSS_COMPILE=${CROSS_COMPILE} defconfig
+    # make -j6 ARCH=${ARCH} CROSS_COMPILE=${CROSS_COMPILE} mrproper
+    # make -j6 ARCH=${ARCH} CROSS_COMPILE=${CROSS_COMPILE} defconfig
     make -j6 ARCH=${ARCH} CROSS_COMPILE=${CROSS_COMPILE} all
     make -j6 ARCH=${ARCH} CROSS_COMPILE=${CROSS_COMPILE} dtbs
 fi
@@ -51,7 +51,7 @@ cd "$OUTDIR"
 if [ -d "${OUTDIR}/rootfs" ]
 then
 	echo "Deleting rootfs directory at ${OUTDIR}/rootfs and starting over"
-    sudo rm  -rf ${OUTDIR}/rootfs
+    sudo rm -rf ${OUTDIR}/rootfs
 fi
 
 # TODO: Create necessary base directories
@@ -112,4 +112,4 @@ sudo chown -R root:root *
 # TODO: Create initramfs.cpio.gz
 echo  "Creating root filesystem using initramfs"
 find . | cpio -H newc -ov --owner root:root > ${OUTDIR}/rootfs/initramfs.cpio
-gzip -f initramfs.cpio
+gzip -f initramfs.cpio > ${OUTDIR}/initramfs.cpio.gz
