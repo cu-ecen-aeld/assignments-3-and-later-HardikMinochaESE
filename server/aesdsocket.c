@@ -230,7 +230,7 @@ int init_server_socket(void){
 
 
     // Listen for connections
-    if (listen(server_fd, 0) != 0) {
+    if (listen(server_fd, 128) != 0) {
         ERROR_LOG("Socket could not listen to port %s", PORT);
         close(server_fd);
         return -1;
