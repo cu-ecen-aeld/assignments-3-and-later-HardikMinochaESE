@@ -7,6 +7,8 @@
 *   
 */
 
+#define _POSIX_C_SOURCE 200809L
+#define _GNU_SOURCE
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -18,7 +20,11 @@
 #include <syslog.h>
 #include <signal.h>
 #include <arpa/inet.h>
-
+#include <netinet/in.h>
+#include <pthread.h>  // For threading support
+#include <time.h>     // For timestamp functionality
+#include <sys/time.h>
+#include <sys/signal.h>
 
 // Optional: Enable debug logging
 #ifdef DEBUG
@@ -32,9 +38,23 @@
 #define PORT "9000" 
 #define BUFFER_SIZE 1024
 #define FILE_PATH "/var/tmp/aesdsocketdata"
+#define TIMESTAMP_INTERVAL 10  // seconds
 
 volatile sig_atomic_t keep_running = 1;
 
+// Thread connection structure
+struct thread_data {
+    int client_fd;
+    pthread_t thread_id;
+    struct thread_data *next;
+    char client_ip[INET_ADDRSTRLEN];
+};
+
+// Global variables
+pthread_mutex_t file_mutex;
+struct thread_data *thread_list_head;
+pthread_mutex_t list_mutex;
+timer_t timestamp_timer;
 
 // User Function Declarations
 
@@ -42,12 +62,15 @@ void handle_signal(int signal_number);
 void setup_signal_handling(void);
 void make_daemon(void);
 int init_server_socket(void);
+void* spawn_new_client_connection(void* new_client_thread_node);
+void timestamp_handler(void);
+void setup_timestamp_timer();
+void add_thread_to_list(struct thread_data *node);
+void cleanup_threads();
 
 
 int main(int argc, char *argv[]) {
     int server_fd, client_fd;
-    char recv_buffer[BUFFER_SIZE];
-    FILE *data_file;
     int create_daemon_flag = 0;
 
     // Parse command line arguments
@@ -79,8 +102,9 @@ int main(int argc, char *argv[]) {
         make_daemon();
     }
 
-    while (keep_running) {
+    setup_timestamp_timer();
 
+    while (keep_running) {
         struct sockaddr_storage client_addr;
         socklen_t client_len = sizeof(client_addr);
 
@@ -89,83 +113,30 @@ int main(int argc, char *argv[]) {
             if (keep_running) {
                 ERROR_LOG("Socket accept failed");
             }
-            continue;
         }
 
-        // Log accepted connection
-        char *client_ip = inet_ntoa(((struct sockaddr_in*)&client_addr)->sin_addr);
-        syslog(LOG_INFO, "Accepted connection from %s", client_ip);
+        // Allocate a new thread_node with the new client_fd created.
+        struct thread_data *new_thread_node = malloc(sizeof(struct thread_data));
+        new_thread_node->client_fd = client_fd;
+        inet_ntop(AF_INET, &((struct sockaddr_in*)&client_addr)->sin_addr, 
+                 new_thread_node->client_ip, INET_ADDRSTRLEN);
 
-        // Open file for appending, create if doesn't exist.
-        data_file = fopen(FILE_PATH, "a+");
-        if (!data_file) {
-            ERROR_LOG("Failed to openinet_ntoa file %s", FILE_PATH);
+        if (pthread_create(&new_thread_node->thread_id, NULL, 
+                         spawn_new_client_connection, new_thread_node) != 0) {
+            ERROR_LOG("Failed to create new thread node");
+            free(new_thread_node);
             close(client_fd);
-            continue;
+        }
+        else{
+            add_thread_to_list(new_thread_node);
+           syslog(LOG_INFO, "Accepted connection from %s", new_thread_node->client_ip);
         }
 
-        // Dynamic buffer for incoming data
-        char *data_buffer = NULL;
-        size_t data_length = 0;
-
-        // Receive data and handle delimiting and storing it in file.
-        while (keep_running) {
-            ssize_t bytes_received = recv(client_fd, recv_buffer, sizeof(recv_buffer) - 1, 0);
-            if (bytes_received <= 0) {
-                break; // Connection closed or error
-            }
-
-            recv_buffer[bytes_received] = '\0'; // Null-terminate the received data
-
-            // Append received data to the data buffer
-            size_t new_length = data_length + bytes_received;
-            // Since we are not sure how much RAM we will have available, use realloc instead of malloc.
-            data_buffer = realloc(data_buffer, new_length + 1);
-            if (!data_buffer) {
-                ERROR_LOG("Memory allocation failed");
-                break;
-            }
-            memcpy(data_buffer + data_length, recv_buffer, bytes_received);
-            data_length = new_length;
-            data_buffer[data_length] = '\0';
-
-            // Check for newline character
-            char *newline_pos = strchr(data_buffer, '\n');
-            while (newline_pos) {
-                *newline_pos = '\0';
-
-                // Write to file
-                fputs(data_buffer, data_file);
-                fputc('\n', data_file); 
-                fflush(data_file);
-
-                // Send the full content back to the client
-                fseek(data_file, 0, SEEK_SET);
-                size_t bytes_read;
-                while ((bytes_read = fread(recv_buffer, 1, sizeof(recv_buffer), data_file)) > 0) {
-                    send(client_fd, recv_buffer, bytes_read, 0);
-                }
-
-                // Move the remaining data to the beginning of the buffer
-                size_t remaining_length = data_length - (newline_pos - data_buffer + 1);
-                memmove(data_buffer, newline_pos + 1, remaining_length);
-                data_length = remaining_length;
-                data_buffer[data_length] = '\0'; 
-
-                // Check for the next newline
-                newline_pos = strchr(data_buffer, '\n');
-            }
-        }
-
-        free(data_buffer);
-        fclose(data_file);
-        close(client_fd);
-
-        // Log closed connection
-        syslog(LOG_INFO, "Closed connection from %s", client_ip);
     }
 
     // Cleanup
+    cleanup_threads();
+    timer_delete(timestamp_timer);
     close(server_fd);
     if (remove(FILE_PATH) == 0) {
         syslog(LOG_INFO, "Deleted file %s", FILE_PATH);
@@ -245,6 +216,7 @@ int init_server_socket(void){
 void handle_signal(int signal_number) {
     if(signal_number == SIGINT || signal_number == SIGTERM) {
         keep_running = 0;
+        cleanup_threads();
         syslog(LOG_INFO, "Caught signal, initiating graceful termination");
     }
 }
@@ -282,4 +254,103 @@ void make_daemon(void) {
         DEBUG_LOG("Parent process terminated");
         exit(EXIT_SUCCESS);
     }
+}
+
+/*
+* Handles packet reception and wiritng to file for new_client_thread_node.
+*/
+void* spawn_new_client_connection(void* new_client_thread_node) {
+    struct thread_data *data = (struct thread_data*)new_client_thread_node;
+    char recv_buffer[BUFFER_SIZE];
+    FILE *data_file;
+
+    while (keep_running) {
+        ssize_t bytes_received = recv(data->client_fd, recv_buffer, sizeof(recv_buffer) - 1, 0);
+        if (bytes_received <= 0) break;
+
+        recv_buffer[bytes_received] = '\0';
+
+        // Lock mutex before file operations
+        pthread_mutex_lock(&file_mutex);
+        data_file = fopen(FILE_PATH, "a+");
+        if (data_file) {
+            fputs(recv_buffer, data_file);
+            fclose(data_file);
+            
+            // Send complete file back to client
+            data_file = fopen(FILE_PATH, "r");
+            while (fgets(recv_buffer, sizeof(recv_buffer), data_file)) {
+                send(data->client_fd, recv_buffer, strlen(recv_buffer), 0);
+            }
+            fclose(data_file);
+        }
+        pthread_mutex_unlock(&file_mutex);
+    }
+
+    close(data->client_fd);
+    syslog(LOG_INFO, "Closed connection from %s", data->client_ip);
+    return NULL;
+}
+
+// Timestamp handler
+void timestamp_handler(void) {
+    time_t now;
+    struct tm *time_info;
+    char timestamp[100];
+    
+    time(&now);
+    time_info = localtime(&now);
+    strftime(timestamp, sizeof(timestamp), "timestamp:%a, %d %b %Y %H:%M:%S %z\n", time_info);
+
+    pthread_mutex_lock(&file_mutex);
+    FILE *file = fopen(FILE_PATH, "a");
+    if (file) {
+        fputs(timestamp, file);
+        fclose(file);
+    }
+    pthread_mutex_unlock(&file_mutex);
+}
+
+// Setup timer for timestamps
+void setup_timestamp_timer() {
+    struct sigevent sev;
+    struct itimerspec its;
+
+    sev.sigev_notify = SIGEV_THREAD;
+    sev.sigev_notify_function = timestamp_handler;
+    sev.sigev_notify_attributes = NULL;
+    sev.sigev_value.sival_ptr = NULL;
+
+    timer_create(CLOCK_REALTIME, &sev, &timestamp_timer);
+
+    its.it_value.tv_sec = TIMESTAMP_INTERVAL;
+    its.it_value.tv_nsec = 0;
+    its.it_interval.tv_sec = TIMESTAMP_INTERVAL;
+    its.it_interval.tv_nsec = 0;
+
+    timer_settime(timestamp_timer, 0, &its, NULL);
+}
+
+// Add node to thread list
+void add_thread_to_list(struct thread_data *node) {
+    pthread_mutex_lock(&list_mutex);
+    node->next = thread_list_head;
+    thread_list_head = node;
+    pthread_mutex_unlock(&list_mutex);
+}
+
+// Clean up threads
+void cleanup_threads() {
+    pthread_mutex_lock(&list_mutex);
+    struct thread_data *current = thread_list_head;
+    struct thread_data *next;
+
+    while (current != NULL) {
+        next = current->next;
+        pthread_join(current->thread_id, NULL);
+        free(current);
+        current = next;
+    }
+    thread_list_head = NULL;
+    pthread_mutex_unlock(&list_mutex);
 }
