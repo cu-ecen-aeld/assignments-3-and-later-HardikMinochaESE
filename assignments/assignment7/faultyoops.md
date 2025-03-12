@@ -64,15 +64,21 @@ Code: d2800001 d2800000 d503233f d50323bf (b900003f)
 This tells us that the fault occured in the faulty_write() function in the faulty module
 
 ``` Call trace:
- faulty_write+0x10/0x20 [faulty] ```
+ faulty_write+0x10/0x20 [faulty] 
+```
  
 ### Error Description
 
 This means that the program tried virtual memory address 0x00, which is out of bounds of usable memory (NULL)
 
-``` Unable to handle kernel NULL pointer dereference at virtual address 0000000000000000 ```
+``` Unable to handle kernel NULL pointer dereference at virtual address 0000000000000000 
+```
 
 ### Core Dump
+
+The message also contains the contents of the CPU registers, Stack Pointer and Program Counter (at faulty_write)
+where the error occured.
+
 
 ```pc : faulty_write+0x10/0x20 [faulty]
 lr : vfs_write+0xc8/0x390
@@ -86,11 +92,6 @@ x14: 0000000000000000 x13: 0000000000000000 x12: 0000000000000000
 x11: 0000000000000000 x10: 0000000000000000 x9 : 0000000000000000
 x8 : 0000000000000000 x7 : 0000000000000000 x6 : 0000000000000000
 x5 : 0000000000000001 x4 : ffffffc000787000 x3 : ffffffc008de3dc0
-x2 : 000000000000000c x1 : 0000000000000000 x0 : 0000000000000000```
-
-
-The message also contains the contents of the CPU registers, Stack Pointer and Program Counter (at faulty_write)
-where the error occured.
- 
-
+x2 : 000000000000000c x1 : 0000000000000000 x0 : 0000000000000000
+``` 
 
