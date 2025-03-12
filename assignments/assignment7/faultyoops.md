@@ -1,4 +1,11 @@
-#Faulty oops message
+# Faulty oops message
+
+## How to reproduce
+
+1. Run ./runqemu.sh
+2. Once qemu is running, lsmod to ensure the "faulty" device endpoint is visible
+3. Type ```echo "Hello World" > /dev/faulty``` 
+4. The kernel should crash with the following oops message:
 
 ```
 Welcome to Buildroot
@@ -52,6 +59,38 @@ Code: d2800001 d2800000 d503233f d50323bf (b900003f)
 
 ## Analysis of oops message:
 
+### Funcion Call Trace
 
+This tells us that the fault occured in the faulty_write() function in the faulty module
+
+``` Call trace:
+ faulty_write+0x10/0x20 [faulty] ```
+ 
+### Error Description
+
+This means that the program tried virtual memory address 0x00, which is out of bounds of usable memory (NULL)
+
+``` Unable to handle kernel NULL pointer dereference at virtual address 0000000000000000 ```
+
+### Core Dump
+
+```pc : faulty_write+0x10/0x20 [faulty]
+lr : vfs_write+0xc8/0x390
+sp : ffffffc008de3d20
+x29: ffffffc008de3d80 x28: ffffff8001b29a80 x27: 0000000000000000
+x26: 0000000000000000 x25: 0000000000000000 x24: 0000000000000000
+x23: 000000000000000c x22: 000000000000000c x21: ffffffc008de3dc0
+x20: 000000556423b990 x19: ffffff8001bcdd00 x18: 0000000000000000
+x17: 0000000000000000 x16: 0000000000000000 x15: 0000000000000000
+x14: 0000000000000000 x13: 0000000000000000 x12: 0000000000000000
+x11: 0000000000000000 x10: 0000000000000000 x9 : 0000000000000000
+x8 : 0000000000000000 x7 : 0000000000000000 x6 : 0000000000000000
+x5 : 0000000000000001 x4 : ffffffc000787000 x3 : ffffffc008de3dc0
+x2 : 000000000000000c x1 : 0000000000000000 x0 : 0000000000000000```
+
+
+The message also contains the contents of the CPU registers, Stack Pointer and Program Counter (at faulty_write)
+where the error occured.
+ 
 
 
