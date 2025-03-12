@@ -7,8 +7,6 @@
 *   
 */
 
-#define _POSIX_C_SOURCE 200809L
-#define _GNU_SOURCE
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -23,8 +21,7 @@
 #include <netinet/in.h>
 #include <pthread.h>  // For threading support
 #include <time.h>     // For timestamp functionality
-#include <sys/time.h>
-#include <sys/signal.h>
+
 
 // Optional: Enable debug logging
 #ifdef DEBUG
@@ -62,8 +59,8 @@ void handle_signal(int signal_number);
 void setup_signal_handling(void);
 void make_daemon(void);
 int init_server_socket(void);
-void* spawn_new_client_connection(void* new_client_thread_node);
-void timestamp_handler(void);
+void* spawn_new_client_connection(void* thread_arg);
+void timestamp_handler(union sigval sv);
 void setup_timestamp_timer();
 void add_thread_to_list(struct thread_data *node);
 void cleanup_threads();
@@ -71,6 +68,8 @@ void cleanup_threads();
 
 int main(int argc, char *argv[]) {
     int server_fd, client_fd;
+    char recv_buffer[BUFFER_SIZE];
+    FILE *data_file;
     int create_daemon_flag = 0;
 
     // Parse command line arguments
@@ -113,26 +112,27 @@ int main(int argc, char *argv[]) {
             if (keep_running) {
                 ERROR_LOG("Socket accept failed");
             }
+            continue;
         }
 
-        // Allocate a new thread_node with the new client_fd created.
-        struct thread_data *new_thread_node = malloc(sizeof(struct thread_data));
-        new_thread_node->client_fd = client_fd;
+        struct thread_data *thread_node = malloc(sizeof(struct thread_data));
+        thread_node->client_fd = client_fd;
         inet_ntop(AF_INET, &((struct sockaddr_in*)&client_addr)->sin_addr, 
-                 new_thread_node->client_ip, INET_ADDRSTRLEN);
+                 thread_node->client_ip, INET_ADDRSTRLEN);
 
-        if (pthread_create(&new_thread_node->thread_id, NULL, 
-                         spawn_new_client_connection, new_thread_node) != 0) {
-            ERROR_LOG("Failed to create new thread node");
-            free(new_thread_node);
+        if (pthread_create(&thread_node->thread_id, NULL, 
+                         spawn_new_client_connection, thread_node) != 0) {
+            ERROR_LOG("Failed to create thread");
+            free(thread_node);
             close(client_fd);
-        }
-        else{
-            add_thread_to_list(new_thread_node);
-           syslog(LOG_INFO, "Accepted connection from %s", new_thread_node->client_ip);
+            continue;
         }
 
+        add_thread_to_list(thread_node);
+        syslog(LOG_INFO, "Accepted connection from %s", thread_node->client_ip);
     }
+
+
 
     // Cleanup
     cleanup_threads();
@@ -256,11 +256,9 @@ void make_daemon(void) {
     }
 }
 
-/*
-* Handles packet reception and wiritng to file for new_client_thread_node.
-*/
-void* spawn_new_client_connection(void* new_client_thread_node) {
-    struct thread_data *data = (struct thread_data*)new_client_thread_node;
+// Function to handle client connection in a thread
+void* spawn_new_client_connection(void* thread_arg) {
+    struct thread_data *data = (struct thread_data*)thread_arg;
     char recv_buffer[BUFFER_SIZE];
     FILE *data_file;
 
@@ -293,7 +291,7 @@ void* spawn_new_client_connection(void* new_client_thread_node) {
 }
 
 // Timestamp handler
-void timestamp_handler(void) {
+void timestamp_handler(union sigval sv) {
     time_t now;
     struct tm *time_info;
     char timestamp[100];
