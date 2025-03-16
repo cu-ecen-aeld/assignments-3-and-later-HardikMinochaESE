@@ -22,6 +22,15 @@
 #include <pthread.h>  // For threading support
 #include <time.h>     // For timestamp functionality
 
+#ifndef USE_AESD_CHAR_DEVICE
+#define USE_AESD_CHAR_DEVICE 1
+#endif
+
+#if USE_AESD_CHAR_DEVICE
+#define DATA_PATH "/dev/aesdchar"
+#else
+#define DATA_PATH "/var/tmp/aesdsocketdata"
+#endif
 
 // Optional: Enable debug logging
 #ifdef DEBUG
@@ -34,7 +43,6 @@
 
 #define PORT "9000" 
 #define BUFFER_SIZE 1024
-#define FILE_PATH "/var/tmp/aesdsocketdata"
 #define TIMESTAMP_INTERVAL 10  // seconds
 
 volatile sig_atomic_t keep_running = 1;
@@ -101,7 +109,9 @@ int main(int argc, char *argv[]) {
         make_daemon();
     }
 
+#if !USE_AESD_CHAR_DEVICE
     setup_timestamp_timer();
+#endif
 
     while (keep_running) {
         struct sockaddr_storage client_addr;
@@ -138,11 +148,13 @@ int main(int argc, char *argv[]) {
     cleanup_threads();
     timer_delete(timestamp_timer);
     close(server_fd);
-    if (remove(FILE_PATH) == 0) {
-        syslog(LOG_INFO, "Deleted file %s", FILE_PATH);
+#if !USE_AESD_CHAR_DEVICE
+    if (remove(DATA_PATH) == 0) {
+        syslog(LOG_INFO, "Deleted file %s", DATA_PATH);
     } else {
-        ERROR_LOG("Failed to delete file %s", FILE_PATH);
+        ERROR_LOG("Failed to delete file %s", DATA_PATH);
     }
+#endif
 
     // Close syslog
     closelog();
@@ -260,7 +272,7 @@ void make_daemon(void) {
 void* spawn_new_client_connection(void* thread_arg) {
     struct thread_data *data = (struct thread_data*)thread_arg;
     char recv_buffer[BUFFER_SIZE];
-    FILE *data_file;
+    FILE *data_file = NULL;
 
     while (keep_running) {
         ssize_t bytes_received = recv(data->client_fd, recv_buffer, sizeof(recv_buffer) - 1, 0);
@@ -270,13 +282,15 @@ void* spawn_new_client_connection(void* thread_arg) {
 
         // Lock mutex before file operations
         pthread_mutex_lock(&file_mutex);
-        data_file = fopen(FILE_PATH, "a+");
+        
+        // Only open the file when needed
+        data_file = fopen(DATA_PATH, "a+");
         if (data_file) {
             fputs(recv_buffer, data_file);
             fclose(data_file);
             
             // Send complete file back to client
-            data_file = fopen(FILE_PATH, "r");
+            data_file = fopen(DATA_PATH, "r");
             while (fgets(recv_buffer, sizeof(recv_buffer), data_file)) {
                 send(data->client_fd, recv_buffer, strlen(recv_buffer), 0);
             }
@@ -291,6 +305,7 @@ void* spawn_new_client_connection(void* thread_arg) {
 }
 
 // Timestamp handler
+#if !USE_AESD_CHAR_DEVICE
 void timestamp_handler(union sigval sv) {
     time_t now;
     struct tm *time_info;
@@ -301,15 +316,17 @@ void timestamp_handler(union sigval sv) {
     strftime(timestamp, sizeof(timestamp), "timestamp:%a, %d %b %Y %H:%M:%S %z\n", time_info);
 
     pthread_mutex_lock(&file_mutex);
-    FILE *file = fopen(FILE_PATH, "a");
+    FILE *file = fopen(DATA_PATH, "a");
     if (file) {
         fputs(timestamp, file);
         fclose(file);
     }
     pthread_mutex_unlock(&file_mutex);
 }
+#endif
 
 // Setup timer for timestamps
+#if !USE_AESD_CHAR_DEVICE
 void setup_timestamp_timer() {
     struct sigevent sev;
     struct itimerspec its;
@@ -328,6 +345,7 @@ void setup_timestamp_timer() {
 
     timer_settime(timestamp_timer, 0, &its, NULL);
 }
+#endif
 
 // Add node to thread list
 void add_thread_to_list(struct thread_data *node) {
