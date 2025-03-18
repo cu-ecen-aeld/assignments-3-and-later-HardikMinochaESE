@@ -37,11 +37,13 @@ struct aesd_buffer_entry *aesd_circular_buffer_find_entry_offset_for_fpos(struct
     uint8_t current_index = buffer->out_offs;
     int entries_checked = 0;
     
-    // Loop through buffer entries until we find the one containing char_offset
-    while ((entries_checked < AESDCHAR_MAX_WRITE_OPERATIONS_SUPPORTED) && 
-           ((!buffer->full && current_index != buffer->in_offs) || 
-            (buffer->full && entries_checked < AESDCHAR_MAX_WRITE_OPERATIONS_SUPPORTED))) {
-        
+    // Handle empty buffer case
+    if (!buffer->full && buffer->in_offs == buffer->out_offs) {
+        return NULL;
+    }
+    
+    // Calculate total bytes and find correct entry
+    do {
         if (buffer->entry[current_index].buffptr) {
             if (char_offset < (cumulative_size + buffer->entry[current_index].size)) {
                 *entry_offset_byte_rtn = char_offset - cumulative_size;
@@ -52,7 +54,8 @@ struct aesd_buffer_entry *aesd_circular_buffer_find_entry_offset_for_fpos(struct
         
         current_index = (current_index + 1) % AESDCHAR_MAX_WRITE_OPERATIONS_SUPPORTED;
         entries_checked++;
-    }
+    } while ((entries_checked < AESDCHAR_MAX_WRITE_OPERATIONS_SUPPORTED) && 
+             (current_index != buffer->in_offs || buffer->full));
     
     return NULL;
 }
@@ -69,20 +72,36 @@ void aesd_circular_buffer_add_entry(struct aesd_circular_buffer *buffer, const s
     /**
     * TODO: implement per description
     */
+    // If buffer is full, we need to advance out_offs before adding new entry
+    if (buffer->full) {
+        buffer->out_offs = (buffer->out_offs + 1) % AESDCHAR_MAX_WRITE_OPERATIONS_SUPPORTED;
+        buffer->full = false;  // Buffer won't be full after advancing out_offs
+    }
+    
+    // Check if this entry should be combined with the previous one
+    if (buffer->in_offs > 0 || buffer->full) {
+        uint8_t prev_index = (buffer->in_offs == 0) ? 
+            AESDCHAR_MAX_WRITE_OPERATIONS_SUPPORTED - 1 : buffer->in_offs - 1;
+            
+        // If previous entry exists and doesn't end with newline, combine them
+        if (buffer->entry[prev_index].buffptr && 
+            buffer->entry[prev_index].size > 0 &&
+            buffer->entry[prev_index].buffptr[buffer->entry[prev_index].size - 1] != '\n') {
+            // This entry should be combined with the previous one
+            buffer->in_offs = prev_index;  // Move back to modify previous entry
+        }
+    }
+    
     // Copy the new entry to the current write position
     buffer->entry[buffer->in_offs] = *add_entry;
     
-    // If buffer is full, advance read position
-    if (buffer->full) {
-        buffer->out_offs = (buffer->out_offs + 1) % AESDCHAR_MAX_WRITE_OPERATIONS_SUPPORTED;
-    }
-    
-    // Advance write position
-    buffer->in_offs = (buffer->in_offs + 1) % AESDCHAR_MAX_WRITE_OPERATIONS_SUPPORTED;
-    
-    // Set full flag if write position catches up to read position
-    if (buffer->in_offs == buffer->out_offs) {
-        buffer->full = true;
+    // Only advance write position if this entry ends with newline
+    if (add_entry->size > 0 && 
+        add_entry->buffptr[add_entry->size - 1] == '\n') {
+        buffer->in_offs = (buffer->in_offs + 1) % AESDCHAR_MAX_WRITE_OPERATIONS_SUPPORTED;
+        if (buffer->in_offs == buffer->out_offs) {
+            buffer->full = true;
+        }
     }
 }
 

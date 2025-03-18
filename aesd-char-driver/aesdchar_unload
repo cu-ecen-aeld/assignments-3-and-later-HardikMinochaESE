@@ -1,10 +1,16 @@
 #!/bin/sh
-module=aesdchar
-device=aesdchar
-cd `dirname $0`
-# invoke rmmod with all arguments we got
-rmmod $module || exit 1
+# Script to unload aesdchar driver
 
-# Remove stale nodes
+# Remove the module
+module="aesdchar"
+device="aesdchar"
 
-rm -f /dev/${device}
+# Remove the device if it exists
+if [ -e /dev/${device} ]; then
+    rm -f /dev/${device}
+fi
+
+# Unload the module
+if lsmod | grep "$module" &> /dev/null ; then
+    rmmod $module
+fi

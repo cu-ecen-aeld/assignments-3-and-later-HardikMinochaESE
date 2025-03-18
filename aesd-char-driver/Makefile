@@ -1,4 +1,4 @@
-# See example Makefile from scull project
+# See example Makefile from scull example
 # Comment/uncomment the following line to disable/enable debugging
 #DEBUG = y
 
@@ -10,6 +10,7 @@ else
 endif
 
 EXTRA_CFLAGS += $(DEBFLAGS)
+EXTRA_CFLAGS += -I$(PWD)
 
 ifneq ($(KERNELRELEASE),)
 # call from kernel build system
@@ -26,5 +27,7 @@ modules:
 endif
 
 clean:
-	rm -rf *.o *~ core .depend .*.cmd *.ko *.mod.c .tmp_versions
+	rm -rf *.o *~ core .depend .*.cmd *.ko *.mod.c .tmp_versions Module.* modules.order
+
+.PHONY: clean modules
 

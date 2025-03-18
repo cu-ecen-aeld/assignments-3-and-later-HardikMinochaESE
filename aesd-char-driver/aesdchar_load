@@ -1,25 +1,29 @@
 #!/bin/sh
-module=aesdchar
-device=aesdchar
+# Script to load aesdchar driver
+module="aesdchar"
+device="aesdchar"
 mode="664"
-cd `dirname $0`
-set -e
-# Group: since distributions do it differently, look for wheel or use staff
-if grep -q '^staff:' /etc/group; then
-    group="staff"
-else
-    group="wheel"
+group="sudo"
+
+# Remove any existing device
+if [ -e /dev/${device} ]; then
+    rm /dev/${device}
 fi
 
-if [ -e ${module}.ko ]; then
-    echo "Loading local built file ${module}.ko"
-    insmod ./$module.ko $* || exit 1
-else
-    echo "Local file ${module}.ko not found, attempting to modprobe"
-    modprobe ${module} || exit 1
+# Remove the module if already loaded
+if lsmod | grep "$module" &> /dev/null ; then
+    rmmod $module
 fi
+
+# Load the module
+modprobe $module.ko || exit 1
+
+# Retrieve the major number
 major=$(awk "\$2==\"$module\" {print \$1}" /proc/devices)
-rm -f /dev/${device}
+
+# Create the device node
 mknod /dev/${device} c $major 0
+
+# Set permissions
 chgrp $group /dev/${device}
-chmod $mode  /dev/${device}
+chmod $mode /dev/${device}
