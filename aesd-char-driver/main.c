@@ -108,7 +108,10 @@ ssize_t aesd_write(struct file *filp, const char __user *buf, size_t count,
     ssize_t retval = -ENOMEM;
     struct aesd_dev *dev = filp->private_data;
     char *kernel_buf;
+<<<<<<< HEAD
     bool has_newline = false;
+=======
+>>>>>>> 8f4ac71 (assignment-3 base set for assgn-9)
     
     PDEBUG("write %zu bytes with offset %lld",count,*f_pos);
     /**
@@ -126,9 +129,12 @@ ssize_t aesd_write(struct file *filp, const char __user *buf, size_t count,
         return -EFAULT;
     }
 
+<<<<<<< HEAD
     // Check for newline in this write
     has_newline = memchr(kernel_buf, '\n', count) != NULL;
 
+=======
+>>>>>>> 8f4ac71 (assignment-3 base set for assgn-9)
     // Acquire mutex for thread safety
     if (mutex_lock_interruptible(&dev->lock)) {
         kfree(kernel_buf);
@@ -147,7 +153,11 @@ ssize_t aesd_write(struct file *filp, const char __user *buf, size_t count,
             return -ENOMEM;
         }
         dev->unfinished_entry.buffptr = new_buf;
+<<<<<<< HEAD
         memcpy((char *)dev->unfinished_entry.buffptr + dev->unfinished_entry.size,
+=======
+        memcpy(dev->unfinished_entry.buffptr + dev->unfinished_entry.size,
+>>>>>>> 8f4ac71 (assignment-3 base set for assgn-9)
                kernel_buf, count);
         dev->unfinished_entry.size += count;
         kfree(kernel_buf);
@@ -156,6 +166,7 @@ ssize_t aesd_write(struct file *filp, const char __user *buf, size_t count,
         dev->unfinished_entry.size = count;
     }
 
+<<<<<<< HEAD
     if (has_newline) {
         // Save the entry that might be overwritten if buffer is full
         if (dev->buffer.full) {
@@ -167,6 +178,21 @@ ssize_t aesd_write(struct file *filp, const char __user *buf, size_t count,
         } else {
             // Buffer not full, just add the entry
             aesd_circular_buffer_add_entry(&dev->buffer, &dev->unfinished_entry);
+=======
+    // Check if we have a complete line
+    char *newline_pos = memchr(dev->unfinished_entry.buffptr, 
+                              '\n', 
+                              dev->unfinished_entry.size);
+    
+    if (newline_pos) {
+        // We have a complete line, add it to circular buffer
+        struct aesd_buffer_entry *entry_to_free = 
+            aesd_circular_buffer_add_entry(&dev->buffer, &dev->unfinished_entry);
+        
+        // Free the overwritten entry if any
+        if (entry_to_free) {
+            kfree(entry_to_free->buffptr);
+>>>>>>> 8f4ac71 (assignment-3 base set for assgn-9)
         }
         
         // Reset unfinished entry
