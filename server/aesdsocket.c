@@ -21,6 +21,11 @@
 #include <netinet/in.h>
 #include <pthread.h>  // For threading support
 #include <time.h>     // For timestamp functionality
+#include <stdbool.h>
+#include <sys/ioctl.h>
+#include <fcntl.h>           // For O_RDWR, O_APPEND
+#include <sys/stat.h>        // For file status flags
+#include "../aesd-char-driver/aesd_ioctl.h"
 
 #ifndef USE_AESD_CHAR_DEVICE
 #define USE_AESD_CHAR_DEVICE 1
@@ -72,12 +77,11 @@ void timestamp_handler(union sigval sv);
 void setup_timestamp_timer();
 void add_thread_to_list(struct thread_data *node);
 void cleanup_threads();
+static bool parse_seek_command(const char *input_buffer, struct aesd_seekto *seek_params);
 
 
 int main(int argc, char *argv[]) {
     int server_fd, client_fd;
-    char recv_buffer[BUFFER_SIZE];
-    FILE *data_file;
     int create_daemon_flag = 0;
 
     // Parse command line arguments
@@ -270,37 +274,69 @@ void make_daemon(void) {
 
 // Function to handle client connection in a thread
 void* spawn_new_client_connection(void* thread_arg) {
-    struct thread_data *data = (struct thread_data*)thread_arg;
-    char recv_buffer[BUFFER_SIZE];
-    FILE *data_file = NULL;
+    struct thread_data *connection_data = (struct thread_data*)thread_arg;
+    char socket_buffer[BUFFER_SIZE];
+    int device_fd = -1;
+
+    // Open the device/file once and keep it open
+    device_fd = open(DATA_PATH, O_RDWR | O_APPEND);
+    if (device_fd == -1) {
+        perror("Failed to open device file");
+        close(connection_data->client_fd);
+        return NULL;
+    }
 
     while (keep_running) {
-        ssize_t bytes_received = recv(data->client_fd, recv_buffer, sizeof(recv_buffer) - 1, 0);
-        if (bytes_received <= 0) break;
+        ssize_t received_bytes = recv(connection_data->client_fd, 
+                                    socket_buffer, 
+                                    sizeof(socket_buffer) - 1, 0);
+        if (received_bytes <= 0) break;
 
-        recv_buffer[bytes_received] = '\0';
+        socket_buffer[received_bytes] = '\0';
 
-        // Lock mutex before file operations
+        // Lock mutex before operations
         pthread_mutex_lock(&file_mutex);
         
-        // Only open the file when needed
-        data_file = fopen(DATA_PATH, "a+");
-        if (data_file) {
-            fputs(recv_buffer, data_file);
-            fclose(data_file);
-            
-            // Send complete file back to client
-            data_file = fopen(DATA_PATH, "r");
-            while (fgets(recv_buffer, sizeof(recv_buffer), data_file)) {
-                send(data->client_fd, recv_buffer, strlen(recv_buffer), 0);
+        struct aesd_seekto seek_params;
+        if (parse_seek_command(socket_buffer, &seek_params)) {
+            // Handle seek command using ioctl
+            if (ioctl(device_fd, AESDCHAR_IOCSEEKTO, &seek_params) != 0) {
+                perror("ioctl seek operation failed");
+                pthread_mutex_unlock(&file_mutex);
+                continue;
             }
-            fclose(data_file);
+        } else {
+            // Handle normal write operation
+            ssize_t written_bytes = write(device_fd, socket_buffer, received_bytes);
+            if (written_bytes < 0) {
+                perror("device write failed");
+                pthread_mutex_unlock(&file_mutex);
+                continue;
+            }
         }
+
+        // Read and send back the content
+        char device_buffer[BUFFER_SIZE];
+        ssize_t read_bytes;
+        
+        // Reset file position for normal writes, keep position for seek commands
+        if (!parse_seek_command(socket_buffer, &seek_params)) {
+            lseek(device_fd, 0, SEEK_SET);
+        }
+        
+        while ((read_bytes = read(device_fd, device_buffer, sizeof(device_buffer))) > 0) {
+            if (send(connection_data->client_fd, device_buffer, read_bytes, 0) != read_bytes) {
+                perror("socket send failed");
+                break;
+            }
+        }
+
         pthread_mutex_unlock(&file_mutex);
     }
 
-    close(data->client_fd);
-    syslog(LOG_INFO, "Closed connection from %s", data->client_ip);
+    close(device_fd);
+    close(connection_data->client_fd);
+    syslog(LOG_INFO, "Closed connection from %s", connection_data->client_ip);
     return NULL;
 }
 
@@ -369,4 +405,22 @@ void cleanup_threads() {
     }
     thread_list_head = NULL;
     pthread_mutex_unlock(&list_mutex);
+}
+
+// Add this function before spawn_new_client_connection
+static bool parse_seek_command(const char *input_buffer, struct aesd_seekto *seek_params)
+{
+    const char *command_prefix = "AESDCHAR_IOCSEEKTO:";
+    unsigned int command_index, command_offset;
+    
+    if (strncmp(input_buffer, command_prefix, strlen(command_prefix)) != 0)
+        return false;
+        
+    if (sscanf(input_buffer + strlen(command_prefix), "%u,%u", 
+               &command_index, &command_offset) != 2)
+        return false;
+        
+    seek_params->write_cmd = command_index;
+    seek_params->write_cmd_offset = command_offset;
+    return true;
 }
