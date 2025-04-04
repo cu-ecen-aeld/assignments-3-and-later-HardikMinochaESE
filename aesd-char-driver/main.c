@@ -17,7 +17,9 @@
 #include <linux/types.h>
 #include <linux/cdev.h>
 #include <linux/fs.h> // file_operations
+#include <linux/uaccess.h>
 #include "aesdchar.h"
+#include "aesd_ioctl.h"
 int aesd_major =   0; // use dynamic major
 int aesd_minor =   0;
 
@@ -108,7 +110,6 @@ ssize_t aesd_write(struct file *filp, const char __user *buf, size_t count,
     ssize_t retval = -ENOMEM;
     struct aesd_dev *dev = filp->private_data;
     char *kernel_buf;
-    bool has_newline = false;
     
     PDEBUG("write %zu bytes with offset %lld",count,*f_pos);
     /**
@@ -125,9 +126,6 @@ ssize_t aesd_write(struct file *filp, const char __user *buf, size_t count,
         kfree(kernel_buf);
         return -EFAULT;
     }
-
-    // Check for newline in this write
-    has_newline = memchr(kernel_buf, '\n', count) != NULL;
 
     // Acquire mutex for thread safety
     if (mutex_lock_interruptible(&dev->lock)) {
@@ -147,7 +145,8 @@ ssize_t aesd_write(struct file *filp, const char __user *buf, size_t count,
             return -ENOMEM;
         }
         dev->unfinished_entry.buffptr = new_buf;
-        memcpy((char *)dev->unfinished_entry.buffptr + dev->unfinished_entry.size,
+        // Cast to void* to avoid const warning
+        memcpy((void *)(dev->unfinished_entry.buffptr + dev->unfinished_entry.size),
                kernel_buf, count);
         dev->unfinished_entry.size += count;
         kfree(kernel_buf);
@@ -156,17 +155,25 @@ ssize_t aesd_write(struct file *filp, const char __user *buf, size_t count,
         dev->unfinished_entry.size = count;
     }
 
-    if (has_newline) {
-        // Save the entry that might be overwritten if buffer is full
+    // Check if we have a complete line
+    char *newline_pos = memchr(dev->unfinished_entry.buffptr, 
+                              '\n', 
+                              dev->unfinished_entry.size);
+    
+    if (newline_pos) {
+        // We have a complete line, add it to circular buffer
+        // Save current entry in case it needs to be freed
+        struct aesd_buffer_entry *entry_to_free = NULL;
         if (dev->buffer.full) {
-            char *buffptr_to_free = (char *)dev->buffer.entry[dev->buffer.out_offs].buffptr;
-            aesd_circular_buffer_add_entry(&dev->buffer, &dev->unfinished_entry);
-            if (buffptr_to_free) {
-                kfree(buffptr_to_free);
-            }
-        } else {
-            // Buffer not full, just add the entry
-            aesd_circular_buffer_add_entry(&dev->buffer, &dev->unfinished_entry);
+            entry_to_free = &dev->buffer.entry[dev->buffer.out_offs];
+        }
+        
+        // Add the entry to circular buffer
+        aesd_circular_buffer_add_entry(&dev->buffer, &dev->unfinished_entry);
+        
+        // If buffer was full, free the overwritten entry
+        if (entry_to_free && entry_to_free->buffptr) {
+            kfree(entry_to_free->buffptr);
         }
         
         // Reset unfinished entry
@@ -178,12 +185,123 @@ ssize_t aesd_write(struct file *filp, const char __user *buf, size_t count,
     mutex_unlock(&dev->lock);
     return retval;
 }
+
+/**
+ * Implement seek functionality
+ */
+loff_t aesd_llseek(struct file *filp, loff_t offset, int seek_type)
+{
+    struct aesd_dev *device = filp->private_data;
+    loff_t new_position;
+    size_t buffer_total_size = 0;
+    uint8_t buffer_index;
+    struct aesd_buffer_entry *buffer_entry;
+
+    // Acquire mutex for thread safety
+    if (mutex_lock_interruptible(&device->lock))
+        return -ERESTARTSYS;
+
+    // Calculate total size of all entries in circular buffer
+    AESD_CIRCULAR_BUFFER_FOREACH(buffer_entry, &device->buffer, buffer_index) {
+        if (buffer_entry->buffptr && buffer_entry->size > 0) {
+            buffer_total_size += buffer_entry->size;
+        }
+    }
+
+    // Handle different seek types
+    switch(seek_type) {
+    case SEEK_SET:
+        new_position = offset;
+        break;
+    case SEEK_CUR:
+        new_position = filp->f_pos + offset;
+        break;
+    case SEEK_END:
+        new_position = buffer_total_size + offset;
+        break;
+    default:
+        mutex_unlock(&device->lock);
+        return -EINVAL;
+    }
+
+    // Validate the new position
+    if (new_position < 0) {
+        mutex_unlock(&device->lock);
+        return -EINVAL;
+    }
+
+    // Update file position
+    filp->f_pos = new_position;
+    mutex_unlock(&device->lock);
+    
+    return new_position;
+}
+
+/**
+ * Implementation of ioctl for seeking to specific command and offset
+ */
+long aesd_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
+{
+    struct aesd_dev *device = filp->private_data;
+    struct aesd_seekto seekto;
+    loff_t target_position = 0;
+    uint8_t cmd_index;
+    uint32_t current_cmd = 0;
+    struct aesd_buffer_entry *buffer_entry;
+    
+    // Verify command is valid
+    if (_IOC_TYPE(cmd) != AESD_IOC_MAGIC) return -ENOTTY;
+    if (_IOC_NR(cmd) > AESDCHAR_IOC_MAXNR) return -ENOTTY;
+
+    switch (cmd) {
+    case AESDCHAR_IOCSEEKTO:
+        // Copy seekto struct from user space
+        if (copy_from_user(&seekto, (const void __user *)arg, sizeof(seekto))) {
+            return -EFAULT;
+        }
+
+        // Acquire mutex for thread safety
+        if (mutex_lock_interruptible(&device->lock))
+            return -ERESTARTSYS;
+
+        // Find the target command and calculate position
+        AESD_CIRCULAR_BUFFER_FOREACH(buffer_entry, &device->buffer, cmd_index) {
+            if (!buffer_entry->buffptr || buffer_entry->size == 0)
+                continue;
+
+            if (current_cmd == seekto.write_cmd) {
+                // Found the target command
+                if (seekto.write_cmd_offset >= buffer_entry->size) {
+                    // Offset is beyond command length
+                    mutex_unlock(&device->lock);
+                    return -EINVAL;
+                }
+                target_position += seekto.write_cmd_offset;
+                filp->f_pos = target_position;
+                mutex_unlock(&device->lock);
+                return 0;
+            }
+            target_position += buffer_entry->size;
+            current_cmd++;
+        }
+
+        // Command not found
+        mutex_unlock(&device->lock);
+        return -EINVAL;
+
+    default:
+        return -ENOTTY;
+    }
+}
+
 struct file_operations aesd_fops = {
     .owner =    THIS_MODULE,
     .read =     aesd_read,
     .write =    aesd_write,
     .open =     aesd_open,
     .release =  aesd_release,
+    .llseek =   aesd_llseek,
+    .unlocked_ioctl = aesd_ioctl,
 };
 
 static int aesd_setup_cdev(struct aesd_dev *dev)
